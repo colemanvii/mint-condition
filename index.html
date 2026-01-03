@@ -8,145 +8,122 @@
 
   <style>
     :root{
-      --bg: #fbfcff;              /* cyber-white */
+      --bg: #fbfcff;              /* soft grey-blue paper */
       --ink: #0b1220;
-      --muted: rgba(11,18,32,.62);
-      --faint: rgba(11,18,32,.10);
-      --hair: rgba(79,118,255,.20);
-      --accent: #4f76ff;          /* gray-ish blue */
+      --muted: rgba(11,18,32,.55);
+      --hair: rgba(79,118,255,.22);
+      --accent: #4f76ff;
       --max: 760px;
       --pad: 22px;
-      --radius: 18px;
     }
 
-    *{ box-sizing: border-box; }
-    html, body { height: 100%; }
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
 
     body{
-      margin: 0;
-      color: var(--ink);
+      margin:0;
       background:
         radial-gradient(1200px 700px at 14% 0%, rgba(79,118,255,.08), transparent 55%),
         radial-gradient(900px 600px at 86% 10%, rgba(79,118,255,.05), transparent 55%),
         var(--bg);
-      font: 17px/1.75 ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-      letter-spacing: .01em;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      color:var(--ink);
+      font:17px/1.75 ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+      letter-spacing:.01em;
+      -webkit-font-smoothing:antialiased;
     }
 
     a{
-      color: inherit;
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color .18s ease, opacity .18s ease;
+      color:inherit;
+      text-decoration:none;
+      border-bottom:1px solid transparent;
+      transition:border-color .18s ease, opacity .18s ease;
     }
-    a:hover{ border-bottom-color: var(--hair); }
-    a:focus-visible{ outline: 2px solid rgba(79,118,255,.35); outline-offset: 3px; border-radius: 8px; }
+    a:hover{ border-bottom-color:var(--hair); }
 
-    /* Top bar */
+    /* Header */
     header{
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(10px);
-      background: linear-gradient(to bottom, rgba(251,252,255,.90), rgba(251,252,255,.62));
-      border-bottom: 1px solid rgba(79,118,255,.12);
+      position:sticky;
+      top:0;
+      backdrop-filter:blur(10px);
+      background:linear-gradient(to bottom, rgba(251,252,255,.9), rgba(251,252,255,.6));
+      border-bottom:1px solid rgba(79,118,255,.12);
     }
     .top{
-      max-width: calc(var(--max) + 220px);
-      margin: 0 auto;
-      padding: 18px var(--pad);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
+      max-width:calc(var(--max) + 220px);
+      margin:0 auto;
+      padding:18px var(--pad);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
     }
     .brand{
-      font: 500 13px/1 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-      color: rgba(11,18,32,.78);
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
+      font:500 13px/1 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+      color:rgba(11,18,32,.78);
+      display:flex;
+      align-items:center;
+      gap:10px;
     }
     .dot{
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(79,118,255,.88));
-      box-shadow: 0 0 0 3px rgba(79,118,255,.10);
-    }
-    nav{
-      display: flex;
-      gap: 10px;
-      font: 500 12px/1 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: rgba(11,18,32,.68);
-    }
-    nav a{
-      padding: 9px 11px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-    }
-    nav a:hover{
-      border-color: rgba(79,118,255,.20);
-      background: rgba(255,255,255,.55);
+      width:8px;height:8px;border-radius:50%;
+      background:radial-gradient(circle at 30% 30%, #fff, rgba(79,118,255,.9));
+      box-shadow:0 0 0 3px rgba(79,118,255,.1);
     }
 
-    /* Layout */
+    /* Main */
     main{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 40px var(--pad) 80px;
-    }
-
-    .meta{
-      margin-top: 2px;
-      font: 500 12px/1.2 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: rgba(11,18,32,.52);
+      max-width:var(--max);
+      margin:0 auto;
+      padding:42px var(--pad) 90px;
     }
 
     h1{
-      margin: 0;
-      font-size: clamp(42px, 6vw, 64px);
-      line-height: 1.02;
-      letter-spacing: -0.03em;
+      margin:0;
+      font-size:clamp(42px, 6vw, 64px);
+      line-height:1.02;
+      letter-spacing:-.03em;
+    }
+
+    .meta{
+      margin-top:4px;
+      font:500 12px/1.2 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--muted);
     }
 
     .rule{
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(79,118,255,.28), transparent);
-      margin: 18px 0 22px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(79,118,255,.28), transparent);
+      margin:18px 0 24px;
     }
 
-    article{
-      font-size: 18px;
+    article{ font-size:18px; }
+    p{ margin:0 0 18px; }
+    p:last-child{ margin-bottom:0; }
+
+    .settle{ margin-bottom:28px; }
+    em{ font-style:italic; }
+
+    /* Archive link */
+    .archive{
+      margin-top:44px;
+      font:500 12px/1 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--muted);
     }
-    p{ margin: 0 0 18px; }
-    p:last-child{ margin-bottom: 0; }
 
-    /* 1% better: intentional breathing for the “settle” moment */
-    .settle{ margin-bottom: 26px; }
-    .settle em{ font-style: italic; }
-
-    /* subtle footer */
     footer{
-      margin-top: 28px;
-      text-align: center;
-      color: rgba(11,18,32,.50);
-      font: 12px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      letter-spacing: .06em;
+      margin-top:30px;
+      text-align:center;
+      font:12px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--muted);
     }
 
-    /* Mobile */
-    @media (max-width: 560px){
-      body{ font-size: 16px; }
-      article{ font-size: 17px; }
-      main{ padding-top: 34px; }
+    @media (max-width:560px){
+      article{ font-size:17px; }
     }
   </style>
 </head>
@@ -154,22 +131,22 @@
 <body>
   <header>
     <div class="top">
-      <a class="brand" href="/" aria-label="Mint Condition home">
+      <a href="/" class="brand">
         Mint Condition <span class="dot" aria-hidden="true"></span>
       </a>
-      <nav aria-label="Primary">
-        <a href="/essays.html">Essays</a>
-      </nav>
     </div>
   </header>
 
   <main>
     <h1>Mint Condition</h1>
     <div class="meta">2026-01-03</div>
-    <div class="rule" role="presentation"></div>
+    <div class="rule"></div>
 
     <article>
-      <p class="settle">Some lines don’t hit.<br />They <em>settle</em>.</p>
+      <p class="settle">
+        Some lines don’t hit.<br />
+        They <em>settle</em>.
+      </p>
 
       <p>
         They don’t announce themselves as important. They don’t chase consensus. They don’t inflate.
@@ -177,13 +154,18 @@
       </p>
 
       <p>
-        When J. Cole says a verse is known like a signed Michael Jordan rookie card in mint condition, he isn’t
-        bragging about popularity. He’s naming a different economy altogether—one where worth is measured by memory,
-        rarity, and survival, not noise. A verse you <em>know</em> is no longer content. It’s an artifact.
+        When J. Cole says a verse is known like a signed Michael Jordan rookie card in mint condition,
+        he isn’t bragging about popularity. He’s naming a different economy altogether—one where worth
+        is measured by memory, rarity, and survival, not noise. A verse you <em>know</em> is no longer
+        content. It’s an artifact.
       </p>
 
       <p>This is not about rap.</p>
     </article>
+
+    <div class="archive">
+      <a href="/archive.html">Archive →</a>
+    </div>
 
     <footer>© <span id="y"></span> Mint Condition</footer>
   </main>
