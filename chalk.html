@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chalk Is the Proof — Mint Condition</title>
+
+  <!-- Monk Mode: quiet, human, restrained -->
+
+  <style>
+    :root {
+      --bg: #f7f6f2; /* bone */
+      --text: #1b1b1b;
+      --muted: #6e6e6e;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.65;
+    }
+
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 8vh 6vw 12vh;
+      position: relative;
+    }
+
+    /* Title */
+    .title {
+      text-align: center;
+      margin-bottom: 12vh;
+    }
+
+    .title h1 {
+      font-size: 2.2rem;
+      font-weight: normal;
+      margin: 0 0 0.75rem;
+    }
+
+    .title span {
+      font-size: 0.9rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* Essay column */
+    .essay {
+      max-width: 620px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+    }
+
+    .essay p {
+      margin: 0 0 1.4rem;
+    }
+
+    /* Floating images */
+    .float-image {
+      position: absolute;
+      width: 220px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+      pointer-events: none;
+    }
+
+    .float-image img {
+      width: 100%;
+      display: block;
+      filter: saturate(95%);
+      transition: transform 0.4s ease, filter 0.4s ease;
+    }
+
+    .float-image.visible {
+      opacity: 0.95;
+      transform: translateY(0);
+    }
+
+    /* Gentle hover on desktop */
+    @media (hover: hover) {
+      .float-image img:hover {
+        transform: scale(1.03);
+        filter: saturate(100%);
+      }
+    }
+
+    /* Footer mark */
+    footer {
+      margin-top: 18vh;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      .float-image {
+        position: static;
+        width: 90%;
+        margin: 4vh auto;
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+      }
+
+      .float-image img:hover {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+
+    <div class="title">
+      <h1>Chalk Is the Proof</h1>
+      <span>Northwest, Tennessee</span>
+    </div>
+
+    <!-- Floating images (replace src with your photographs) -->
+    <div class="float-image" style="top: 38%; left: 4%;">
+      <img src="images/chalk-01.jpg" alt="" />
+    </div>
+
+    <div class="float-image" style="top: 62%; right: 2%; width: 260px;">
+      <img src="images/chalk-02.jpg" alt="" />
+    </div>
+
+    <div class="float-image" style="top: 88%; left: 6%;">
+      <img src="images/chalk-03.jpg" alt="" />
+    </div>
+
+    <section class="essay">
+      <!-- Paste the full 777-word essay here, uninterrupted -->
+      <p>I didn’t expect the pavement to say anything.</p>
+      <p>It was just a school lot — Northwest — cracked concrete, faint lines, the residue of buses and rain and years of foot traffic...</p>
+      <!-- continue essay -->
+    </section>
+
+    <!-- Final image after essay -->
+    <div class="float-image" style="top: 128%; right: 10%; width: 240px;">
+      <img src="images/chalk-04.jpg" alt="" />
+    </div>
+
+    <footer>
+      Mint Condition
+    </footer>
+
+  </main>
+
+  <script>
+    // Reveal floating images on scroll — slow, unforced
+    const images = document.querySelectorAll('.float-image');
+
+    const revealOnScroll = () => {
+      const trigger = window.innerHeight * 0.85;
+      images.forEach(img => {
+        const rect = img.getBoundingClientRect();
+        if (rect.top < trigger) {
+          img.classList.add('visible');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll();
+  </script>
+
+</body>
+</html>
