@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mint Condition</title>
+  <meta name="description" content="Mint Condition" />
+  <style>
+    :root{
+      --bg: #fbfcff;
+      --ink: #0b1220;
+      --muted: rgba(11,18,32,.62);
+      --hair: rgba(79,118,255,.22);
+      --accent: #4f76ff;          /* gray-ish cyber blue */
+      --paper: rgba(255,255,255,.78);
+      --shadow: 0 14px 40px rgba(11,18,32,.06);
+      --radius: 18px;
+      --max: 780px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      background:
+        radial-gradient(1200px 700px at 15% 0%, rgba(79,118,255,.09), transparent 55%),
+        radial-gradient(900px 600px at 85% 10%, rgba(79,118,255,.06), transparent 55%),
+        var(--bg);
+      color:var(--ink);
+      font: 16px/1.7 ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+      letter-spacing: .01em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a{
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color .2s ease, color .2s ease, opacity .2s ease;
+    }
+    a:hover{ border-bottom-color: var(--hair); color: var(--ink); }
+    a:focus-visible{ outline: 2px solid rgba(79,118,255,.35); outline-offset: 3px; border-radius: 6px; }
+
+    /* Top nav */
+    .top{
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(251,252,255,.88), rgba(251,252,255,.55));
+      border-bottom: 1px solid rgba(79,118,255,.12);
+    }
+    .top-inner{
+      max-width: calc(var(--max) + 120px);
+      margin: 0 auto;
+      padding: 18px 22px;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand{
+      font: 500 14px/1 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(11,18,32,.78);
+    }
+    .nav{
+      display:flex;
+      gap: 14px;
+      align-items:center;
+      font: 500 13px/1 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      letter-spacing:.08em;
+      text-transform: uppercase;
+      color: rgba(11,18,32,.72);
+    }
+    .nav a{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+    .nav a:hover{
+      border-color: rgba(79,118,255,.20);
+      background: rgba(255,255,255,.55);
+      box-shadow: 0 6px 20px rgba(11,18,32,.05);
+    }
+
+    /* Page frame */
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 34px 22px 72px;
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.58));
+      border: 1px solid rgba(79,118,255,.16);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 34px 34px 30px;
+    }
+
+    .rule{
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(79,118,255,.30), transparent);
+      margin: 20px 0 26px;
+    }
+
+    h1{
+      margin: 0 0 6px;
+      font-size: clamp(36px, 5vw, 52px);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+    }
+
+    .meta{
+      font: 500 12px/1.2 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(11,18,32,.55);
+    }
+
+    article{
+      margin-top: 18px;
+      font-size: 18px;
+    }
+
+    article p{ margin: 0 0 16px; }
+    article p:last-child{ margin-bottom: 0; }
+
+    em{ font-style: italic; }
+
+    /* Subtle “mint” accent for small details */
+    .mint-dot{
+      display:inline-block;
+      width:8px;height:8px;
+      border-radius: 50%;
+      margin-left: 10px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(79,118,255,.85));
+      box-shadow: 0 0 0 3px rgba(79,118,255,.10);
+      vertical-align: middle;
+    }
+
+    footer{
+      margin-top: 18px;
+      text-align:center;
+      color: rgba(11,18,32,.52);
+      font: 12px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      letter-spacing: .06em;
+    }
+
+    /* Mobile */
+    @media (max-width: 560px){
+      .card{ padding: 26px 22px 22px; }
+      article{ font-size: 17px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <a class="brand" href="/">Mint Condition<span class="mint-dot" aria-hidden="true"></span></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/essays.html">Essays</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card">
+      <h1>Mint Condition</h1>
+      <div class="meta">2026-01-
