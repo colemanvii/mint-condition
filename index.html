@@ -2,176 +2,176 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Mint Condition</title>
-  <meta name="description" content="Mint Condition" />
-
+  <meta name="description" content="Collected slowly. Held, not optimized." />
   <style>
     :root{
-      --bg: #fbfcff;              /* soft grey-blue paper */
-      --ink: #0b1220;
-      --muted: rgba(11,18,32,.55);
-      --hair: rgba(79,118,255,.22);
-      --accent: #4f76ff;
-      --max: 760px;
-      --pad: 22px;
+      --bg:#f7fafc;
+      --ink:#0f172a;
+      --muted:#64748b;
+      --rule:#e5e7eb;
+      --card:#ffffff;
     }
-
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-
+    *{box-sizing:border-box}
     body{
       margin:0;
-      background:
-        radial-gradient(1200px 700px at 14% 0%, rgba(79,118,255,.08), transparent 55%),
-        radial-gradient(900px 600px at 86% 10%, rgba(79,118,255,.05), transparent 55%),
-        var(--bg);
+      background:radial-gradient(900px 500px at 50% 0%, #eef5ff 0%, var(--bg) 55%, var(--bg) 100%);
       color:var(--ink);
-      font:17px/1.75 ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-      letter-spacing:.01em;
+      font-family: Georgia, "Times New Roman", serif;
       -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
     }
-
-    a{
-      color:inherit;
-      text-decoration:none;
-      border-bottom:1px solid transparent;
-      transition:border-color .18s ease, opacity .18s ease;
+    .wrap{
+      max-width:760px;
+      margin:72px auto 120px;
+      padding:0 24px;
     }
-    a:hover{ border-bottom-color:var(--hair); }
-
-    /* Header */
-    header{
-      position:sticky;
-      top:0;
-      backdrop-filter:blur(10px);
-      background:linear-gradient(to bottom, rgba(251,252,255,.9), rgba(251,252,255,.6));
-      border-bottom:1px solid rgba(79,118,255,.12);
-    }
-    .top{
-      max-width:calc(var(--max) + 220px);
-      margin:0 auto;
-      padding:18px var(--pad);
+    .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
+      gap:16px;
+      margin-bottom:48px;
     }
     .brand{
-      font:500 13px/1 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      letter-spacing:.13em;
-      text-transform:uppercase;
-      color:rgba(11,18,32,.78);
       display:flex;
-      align-items:center;
+      align-items:baseline;
       gap:10px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      font-size:.8rem;
+      color:var(--muted);
     }
     .dot{
-      width:8px;height:8px;border-radius:50%;
-      background:radial-gradient(circle at 30% 30%, #fff, rgba(79,118,255,.9));
-      box-shadow:0 0 0 3px rgba(79,118,255,.1);
+      width:8px;height:8px;border-radius:999px;
+      background:#93c5fd;
+      box-shadow:0 0 0 3px rgba(147,197,253,.25);
+      display:inline-block;
+      transform:translateY(-1px);
     }
-
-    /* Main */
-    main{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:42px var(--pad) 90px;
+    .nav a{
+      color:var(--muted);
+      text-decoration:none;
+      border-bottom:1px solid var(--rule);
+      padding-bottom:2px;
+      font-size:.9rem;
+      margin-left:16px;
     }
-
     h1{
+      font-size:3.15rem;
+      line-height:1.08;
       margin:0;
-      font-size:clamp(42px, 6vw, 64px);
-      line-height:1.02;
-      letter-spacing:-.03em;
+      letter-spacing:-.02em;
     }
-
-    .meta{
-      margin-top:4px;
-      font:500 12px/1.2 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      letter-spacing:.14em;
-      text-transform:uppercase;
+    .sub{
+      margin-top:12px;
       color:var(--muted);
+      font-size:1rem;
     }
-
-    .rule{
-      height:1px;
-      background:linear-gradient(90deg, transparent, rgba(79,118,255,.28), transparent);
-      margin:18px 0 24px;
-    }
-
-    article{ font-size:18px; }
-    p{ margin:0 0 18px; }
-    p:last-child{ margin-bottom:0; }
-
-    .settle{ margin-bottom:28px; }
-    em{ font-style:italic; }
-
-    /* Archive link */
-    .archive{
+    .panel{
       margin-top:44px;
-      font:500 12px/1 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      color:var(--muted);
+      background:rgba(255,255,255,.78);
+      border:1px solid var(--rule);
+      border-radius:18px;
+      padding:34px 34px 26px;
+      box-shadow:0 18px 60px rgba(15,23,42,.06);
+      backdrop-filter: blur(6px);
     }
-
+    .meta{
+      color:var(--muted);
+      font-size:.85rem;
+      letter-spacing:.04em;
+      margin-bottom:18px;
+    }
+    p{
+      font-size:1.1rem;
+      line-height:1.75;
+      margin:0 0 22px;
+    }
+    .lead{
+      font-size:1.25rem;
+      margin-bottom:30px;
+    }
+    .lead em{font-style:italic}
+    .closing{margin-top:34px}
+    .after{
+      margin-top:48px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding-top:18px;
+      border-top:1px solid var(--rule);
+    }
+    .after a{
+      color:var(--ink);
+      text-decoration:none;
+      border-bottom:1px solid var(--rule);
+      padding-bottom:2px;
+      font-size:.95rem;
+    }
     footer{
-      margin-top:30px;
-      text-align:center;
-      font:12px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      margin-top:90px;
       color:var(--muted);
-    }
-
-    @media (max-width:560px){
-      article{ font-size:17px; }
+      font-size:.85rem;
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
     }
   </style>
 </head>
-
 <body>
-  <header>
-    <div class="top">
-      <a href="/" class="brand">
-        Mint Condition <span class="dot" aria-hidden="true"></span>
-      </a>
+  <main class="wrap">
+    <div class="topbar">
+      <div class="brand">Mint Condition <span class="dot" aria-hidden="true"></span></div>
+      <div class="nav">
+        <a href="archive.html">Ledger</a>
+      </div>
     </div>
-  </header>
 
-  <main>
     <h1>Mint Condition</h1>
-    <div class="meta">2026-01-03</div>
-    <div class="rule"></div>
+    <div class="sub">Collected slowly. Held, not optimized.</div>
 
-    <article>
-      <p class="settle">
+    <section class="panel" aria-label="Featured entry">
+      <div class="meta">Entry 000 · 2026-01-03</div>
+
+      <p class="lead">
         Some lines don’t hit.<br />
         They <em>settle</em>.
       </p>
 
       <p>
-        They don’t announce themselves as important. They don’t chase consensus. They don’t inflate.
-        They endure—quietly accruing value as time keeps checking the math and finding no errors.
+        They don’t announce themselves as important. They don’t chase consensus.
+        They don’t inflate. They endure—quietly accruing value as time keeps
+        checking the math and finding no errors.
       </p>
 
       <p>
-        When J. Cole says a verse is known like a signed Michael Jordan rookie card in mint condition,
-        he isn’t bragging about popularity. He’s naming a different economy altogether—one where worth
-        is measured by memory, rarity, and survival, not noise. A verse you <em>know</em> is no longer
-        content. It’s an artifact.
+        When J. Cole says a verse is known like a signed Michael Jordan rookie card
+        in mint condition, he isn’t bragging about popularity. He’s naming a
+        different economy altogether—one where worth is measured by memory,
+        rarity, and survival, not noise.
       </p>
 
-      <p>This is not about rap.</p>
-    </article>
+      <p>
+        A verse you <em>know</em> is no longer content.
+        It’s an artifact.
+      </p>
 
-    <div class="archive">
-      <a href="/archive.html">Archive →</a>
-    </div>
+      <p class="closing">This is not about rap.</p>
+      <p style="color:var(--muted); margin:0;">It’s about what lasts when the volume drops.</p>
 
-    <footer>© <span id="y"></span> Mint Condition</footer>
+      <div class="after">
+        <span style="color:var(--muted); font-size:.9rem;">Next: begin the ledger.</span>
+        <a href="archive.html">Open Ledger →</a>
+      </div>
+    </section>
+
+    <footer>
+      <span>© 2026 Mint Condition</span>
+      <span>Signal, not spectacle.</span>
+    </footer>
   </main>
-
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
