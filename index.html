@@ -4,101 +4,160 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Mint Condition</title>
+
   <style>
     :root{
-      --bg:#f7fafc;
-      --ink:#0f172a;
-      --muted:#64748b;
-      --rule:#e5e7eb;
-      --card:#ffffff;
+      --ink:#0b1220;
+      --muted:#6b7280;
+      --rule:rgba(15,23,42,.10);
+
+      /* liquid heat */
+      --ice:#f6f9ff;
+      --mist:#eef4ff;
+      --ember:#ffb86b;
+      --cinder:#ff7a59;
+      --halo:rgba(255,184,107,.18);
+
+      --card:rgba(255,255,255,.72);
+      --shadow:0 26px 90px rgba(15,23,42,.10);
+      --radius:20px;
+      --max:760px;
     }
+
     *{box-sizing:border-box}
+    html,body{height:100%}
+
     body{
       margin:0;
-      background:radial-gradient(900px 500px at 50% 0%, #eef5ff 0%, var(--bg) 55%, var(--bg) 100%);
       color:var(--ink);
       font-family: Georgia, "Times New Roman", serif;
       -webkit-font-smoothing:antialiased;
       text-rendering:optimizeLegibility;
+      background:
+        radial-gradient(1200px 700px at 50% -10%, var(--mist) 0%, var(--ice) 55%, #f7fafc 100%),
+        radial-gradient(900px 420px at 72% 14%, rgba(255,184,107,.22) 0%, rgba(255,184,107,0) 58%),
+        radial-gradient(900px 520px at 18% 28%, rgba(147,197,253,.22) 0%, rgba(147,197,253,0) 62%);
     }
+
+    /* faint “film grain” without assets */
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background:
+        repeating-linear-gradient(0deg,
+          rgba(15,23,42,.018) 0px,
+          rgba(15,23,42,.018) 1px,
+          rgba(255,255,255,0) 2px,
+          rgba(255,255,255,0) 4px);
+      mix-blend-mode:multiply;
+      opacity:.22;
+    }
+
     .wrap{
-      max-width:760px;
+      max-width:var(--max);
       margin:72px auto 120px;
       padding:0 24px;
+      position:relative;
     }
+
     .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:16px;
-      margin-bottom:48px;
+      margin-bottom:56px;
     }
+
     .brand{
       display:flex;
-      align-items:baseline;
-      gap:10px;
-      letter-spacing:.06em;
+      align-items:center;
+      gap:12px;
+      letter-spacing:.12em;
       text-transform:uppercase;
-      font-size:.8rem;
-      color:var(--muted);
+      font-size:.78rem;
+      color:rgba(15,23,42,.62);
+      user-select:none;
     }
-    .dot{
-      width:8px;height:8px;border-radius:999px;
-      background:#93c5fd;
-      box-shadow:0 0 0 3px rgba(147,197,253,.25);
-      display:inline-block;
+
+    .sigil{
+      width:9px;height:9px;border-radius:999px;
+      background:radial-gradient(circle at 35% 35%, #ffe7c9 0%, var(--ember) 45%, var(--cinder) 100%);
+      box-shadow:
+        0 0 0 4px rgba(255,184,107,.16),
+        0 0 28px rgba(255,122,89,.22);
       transform:translateY(-1px);
     }
+
     .nav a{
-      color:var(--muted);
+      color:rgba(15,23,42,.58);
       text-decoration:none;
       border-bottom:1px solid var(--rule);
       padding-bottom:2px;
-      font-size:.9rem;
-      margin-left:16px;
+      font-size:.92rem;
     }
+    .nav a:hover{color:rgba(15,23,42,.78)}
+
     h1{
-      font-size:3.15rem;
-      line-height:1.08;
       margin:0;
-      letter-spacing:-.02em;
+      font-size:3.35rem;
+      line-height:1.05;
+      letter-spacing:-.03em;
     }
-    .sub{
-      margin-top:12px;
-      color:var(--muted);
-      font-size:1rem;
-    }
+
     .panel{
-      margin-top:44px;
-      background:rgba(255,255,255,.78);
+      margin-top:34px;
+      background:var(--card);
       border:1px solid var(--rule);
-      border-radius:18px;
-      padding:34px 34px 26px;
-      box-shadow:0 18px 60px rgba(15,23,42,.06);
-      backdrop-filter: blur(6px);
+      border-radius:var(--radius);
+      padding:42px 42px 30px;
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(10px);
+      position:relative;
     }
+
+    /* inevitability: a quiet internal glow */
+    .panel:before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      border-radius:var(--radius);
+      background:
+        radial-gradient(520px 260px at 18% 12%, var(--halo) 0%, rgba(255,184,107,0) 60%),
+        radial-gradient(520px 260px at 82% 18%, rgba(147,197,253,.14) 0%, rgba(147,197,253,0) 60%);
+      pointer-events:none;
+      opacity:.9;
+      mask:linear-gradient(#000, #000) content-box, linear-gradient(#000,#000);
+      -webkit-mask:linear-gradient(#000, #000) content-box, linear-gradient(#000,#000);
+      padding:1px;
+    }
+
     .meta{
-      color:var(--muted);
-      font-size:.85rem;
-      letter-spacing:.04em;
-      margin-bottom:18px;
+      color:rgba(15,23,42,.54);
+      font-size:.86rem;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      margin-bottom:22px;
     }
+
     p{
-      font-size:1.1rem;
-      line-height:1.75;
+      font-size:1.12rem;
+      line-height:1.78;
       margin:0 0 22px;
     }
+
     .lead{
-      font-size:1.25rem;
-      margin-bottom:30px;
+      font-size:1.32rem;
+      line-height:1.55;
+      margin:0 0 32px;
     }
     .lead em{font-style:italic}
-    .closing{margin-top:34px}
+
     .after{
-      margin-top:48px;
+      margin-top:42px;
       display:flex;
       align-items:center;
-      justify-content:space-between;
+      justify-content:flex-end;
       gap:16px;
       padding-top:18px;
       border-top:1px solid var(--rule);
@@ -108,28 +167,37 @@
       text-decoration:none;
       border-bottom:1px solid var(--rule);
       padding-bottom:2px;
-      font-size:.95rem;
+      font-size:.98rem;
     }
+    .after a:hover{border-bottom-color:rgba(15,23,42,.28)}
+
     footer{
-      margin-top:90px;
-      color:var(--muted);
+      margin-top:72px;
+      color:rgba(15,23,42,.46);
       font-size:.85rem;
-      display:flex;
-      justify-content:space-between;
-      gap:16px;
+    }
+
+    /* mobile */
+    @media (max-width:560px){
+      .wrap{margin:52px auto 92px}
+      h1{font-size:2.6rem}
+      .panel{padding:28px 22px 22px}
+      p{font-size:1.06rem}
+      .lead{font-size:1.18rem}
     }
   </style>
 </head>
+
 <body>
   <main class="wrap">
     <div class="topbar">
-      <div class="brand">Mint Condition <span class="dot" aria-hidden="true"></span></div>
-      <div class="nav">
-        <a href="archive.html">Ledger</a>
-      </div>
+      <div class="brand">Mint Condition <span class="sigil" aria-hidden="true"></span></div>
+      <div class="nav"><a href="archive.html">Ledger</a></div>
     </div>
 
-    <section class="panel" aria-label="Featured entry">
+    <h1>Mint Condition</h1>
+
+    <section class="panel" aria-label="Entry 000">
       <div class="meta">Entry 000 · 2026-01-03</div>
 
       <p class="lead">
@@ -155,19 +223,15 @@
         It’s an artifact.
       </p>
 
-      <p class="closing">This is not about rap.</p>
-      <p style="color:var(--muted); margin:0;">It’s about what lasts when the volume drops.</p>
+      <p>This is not about rap.</p>
+      <p style="color:rgba(15,23,42,.62); margin:0;">It’s about what lasts when the volume drops.</p>
 
       <div class="after">
-        <span style="color:var(--muted); font-size:.9rem;">Next: begin the ledger.</span>
         <a href="archive.html">Open Ledger →</a>
       </div>
     </section>
 
-    <footer>
-      <span>© 2026 Mint Condition</span>
-      <span>Signal, not spectacle.</span>
-    </footer>
+    <footer>© 2026 Mint Condition</footer>
   </main>
 </body>
 </html>
