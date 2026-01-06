@@ -3,235 +3,677 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
   <title>Mint Condition</title>
+  <meta name="description" content="Mint Condition — a quiet place for careful words." />
 
   <style>
+    /* ---------------------------
+       Mint Condition — single-file site
+       Beautiful, quiet, typographic.
+       --------------------------- */
+
     :root{
-      --ink:#0b1220;
-      --muted:#6b7280;
-      --rule:rgba(15,23,42,.10);
+      /* tone */
+      --paper: #fbf7ef;
+      --paper-2: #f6f0e6;
+      --ink: #14110f;
+      --muted: rgba(20,17,15,.62);
+      --faint: rgba(20,17,15,.22);
+      --hairline: rgba(20,17,15,.14);
 
-      /* liquid heat */
-      --ice:#f6f9ff;
-      --mist:#eef4ff;
-      --ember:#ffb86b;
-      --cinder:#ff7a59;
-      --halo:rgba(255,184,107,.18);
+      /* accent */
+      --accent: #b96d33; /* warm tangerine copper */
+      --accent-2: rgba(185,109,51,.18);
 
-      --card:rgba(255,255,255,.72);
-      --shadow:0 26px 90px rgba(15,23,42,.10);
-      --radius:20px;
-      --max:760px;
+      /* type */
+      --serif: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Garamond, Georgia, serif;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Inter, Roboto, Helvetica, Arial, sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+      /* layout */
+      --max: 44rem; /* reading measure */
+      --pad: clamp(1.25rem, 3vw, 2.5rem);
+      --radius: 18px;
+
+      /* rhythm */
+      --leading: 1.72;
+      --text: clamp(1.06rem, 0.95rem + 0.45vw, 1.22rem);
+      --title: clamp(2.1rem, 1.6rem + 2.2vw, 3.05rem);
+      --h2: clamp(1.25rem, 1.1rem + 0.6vw, 1.55rem);
+
+      /* shadow */
+      --shadow: 0 22px 55px rgba(0,0,0,.06);
+      --shadow-2: 0 10px 28px rgba(0,0,0,.06);
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    @media (prefers-color-scheme: dark){
+      :root{
+        --paper: #0f1010;
+        --paper-2: #141515;
+        --ink: #f1eee8;
+        --muted: rgba(241,238,232,.68);
+        --faint: rgba(241,238,232,.24);
+        --hairline: rgba(241,238,232,.14);
+        --accent: #e39a62;
+        --accent-2: rgba(227,154,98,.18);
+        --shadow: 0 22px 55px rgba(0,0,0,.35);
+        --shadow-2: 0 10px 28px rgba(0,0,0,.30);
+      }
+    }
 
+    *{ box-sizing: border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
-      color:var(--ink);
-      font-family: Georgia, "Times New Roman", serif;
-      -webkit-font-smoothing:antialiased;
-      text-rendering:optimizeLegibility;
       background:
-        radial-gradient(1200px 700px at 50% -10%, var(--mist) 0%, var(--ice) 55%, #f7fafc 100%),
-        radial-gradient(900px 420px at 72% 14%, rgba(255,184,107,.22) 0%, rgba(255,184,107,0) 58%),
-        radial-gradient(900px 520px at 18% 28%, rgba(147,197,253,.22) 0%, rgba(147,197,253,0) 62%);
+        radial-gradient(1200px 800px at 20% -10%, rgba(185,109,51,.10), transparent 60%),
+        radial-gradient(900px 700px at 90% 10%, rgba(185,109,51,.08), transparent 62%),
+        linear-gradient(180deg, var(--paper), var(--paper-2));
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: var(--text);
+      line-height: var(--leading);
+      letter-spacing: 0.01em;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
-    /* faint “film grain” without assets */
-    body:before{
+    /* subtle grain overlay */
+    body::before{
       content:"";
-      position:fixed; inset:0;
+      position:fixed;
+      inset:0;
       pointer-events:none;
-      background:
-        repeating-linear-gradient(0deg,
-          rgba(15,23,42,.018) 0px,
-          rgba(15,23,42,.018) 1px,
-          rgba(255,255,255,0) 2px,
-          rgba(255,255,255,0) 4px);
-      mix-blend-mode:multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
       opacity:.22;
+    }
+    @media (prefers-color-scheme: dark){
+      body::before{ opacity:.16; mix-blend-mode: soft-light; }
+    }
+
+    a{
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color .18s ease, color .18s ease, background-color .18s ease;
+    }
+    a:hover{ border-bottom-color: var(--faint); }
+    a:focus-visible{
+      outline: none;
+      box-shadow: 0 0 0 3px var(--accent-2);
+      border-radius: 10px;
     }
 
     .wrap{
-      max-width:var(--max);
-      margin:72px auto 120px;
-      padding:0 24px;
-      position:relative;
+      max-width: calc(var(--max) + 2*var(--pad));
+      margin: 0 auto;
+      padding: var(--pad);
     }
 
-    .topbar{
+    header{
+      padding-top: clamp(1.2rem, 2vw, 2rem);
+      padding-bottom: clamp(1.1rem, 2vw, 1.8rem);
       display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      margin-bottom:56px;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
     }
 
     .brand{
       display:flex;
-      align-items:center;
-      gap:12px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      font-size:.78rem;
-      color:rgba(15,23,42,.62);
-      user-select:none;
+      align-items: baseline;
+      gap:.9rem;
+      min-width: 0;
     }
 
-    .sigil{
-      width:9px;height:9px;border-radius:999px;
-      background:radial-gradient(circle at 35% 35%, #ffe7c9 0%, var(--ember) 45%, var(--cinder) 100%);
-      box-shadow:
-        0 0 0 4px rgba(255,184,107,.16),
-        0 0 28px rgba(255,122,89,.22);
-      transform:translateY(-1px);
+    .mark{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-2);
+      flex: 0 0 auto;
+      transform: translateY(-2px);
     }
 
-    .nav a{
-      color:rgba(15,23,42,.58);
-      text-decoration:none;
-      border-bottom:1px solid var(--rule);
-      padding-bottom:2px;
-      font-size:.92rem;
-    }
-    .nav a:hover{color:rgba(15,23,42,.78)}
-
-    h1{
+    .title{
+      font-size: var(--title);
+      letter-spacing: -0.02em;
+      line-height: 1.05;
       margin:0;
-      font-size:3.35rem;
-      line-height:1.05;
-      letter-spacing:-.03em;
+      font-weight: 520;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .panel{
-      margin-top:34px;
-      background:var(--card);
-      border:1px solid var(--rule);
-      border-radius:var(--radius);
-      padding:42px 42px 30px;
-      box-shadow:var(--shadow);
-      backdrop-filter: blur(10px);
-      position:relative;
+    .subtle{
+      font-family: var(--sans);
+      font-size: .93rem;
+      color: var(--muted);
+      letter-spacing: .02em;
+      line-height: 1.25;
+      margin:0;
     }
 
-    /* inevitability: a quiet internal glow */
-    .panel:before{
-      content:"";
-      position:absolute;
-      inset:-1px;
-      border-radius:var(--radius);
-      background:
-        radial-gradient(520px 260px at 18% 12%, var(--halo) 0%, rgba(255,184,107,0) 60%),
-        radial-gradient(520px 260px at 82% 18%, rgba(147,197,253,.14) 0%, rgba(147,197,253,0) 60%);
-      pointer-events:none;
-      opacity:.9;
-      mask:linear-gradient(#000, #000) content-box, linear-gradient(#000,#000);
-      -webkit-mask:linear-gradient(#000, #000) content-box, linear-gradient(#000,#000);
-      padding:1px;
-    }
-
-    .meta{
-      color:rgba(15,23,42,.54);
-      font-size:.86rem;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      margin-bottom:22px;
-    }
-
-    p{
-      font-size:1.12rem;
-      line-height:1.78;
-      margin:0 0 22px;
-    }
-
-    .lead{
-      font-size:1.32rem;
-      line-height:1.55;
-      margin:0 0 32px;
-    }
-    .lead em{font-style:italic}
-
-    .after{
-      margin-top:42px;
+    nav{
       display:flex;
       align-items:center;
-      justify-content:flex-end;
-      gap:16px;
-      padding-top:18px;
-      border-top:1px solid var(--rule);
+      gap:.6rem;
+      flex: 0 0 auto;
     }
-    .after a{
-      color:var(--ink);
-      text-decoration:none;
-      border-bottom:1px solid var(--rule);
-      padding-bottom:2px;
-      font-size:.98rem;
+    .pill{
+      font-family: var(--sans);
+      font-size: .86rem;
+      color: var(--muted);
+      border: 1px solid var(--hairline);
+      padding: .5rem .75rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.02);
+      backdrop-filter: blur(8px);
     }
-    .after a:hover{border-bottom-color:rgba(15,23,42,.28)}
+    .pill:hover{
+      color: var(--ink);
+      border-color: var(--faint);
+      background: rgba(255,255,255,.04);
+    }
 
-    footer{
-      margin-top:72px;
-      color:rgba(15,23,42,.46);
-      font-size:.85rem;
+    .card{
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.32);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    @media (prefers-color-scheme: dark){
+      .card{ background: rgba(0,0,0,.18); }
     }
 
-    /* mobile */
-    @media (max-width:560px){
-      .wrap{margin:52px auto 92px}
-      h1{font-size:2.6rem}
-      .panel{padding:28px 22px 22px}
-      p{font-size:1.06rem}
-      .lead{font-size:1.18rem}
+    .section{
+      padding: clamp(1.05rem, 2.2vw, 1.6rem) clamp(1.05rem, 2.5vw, 1.75rem);
+    }
+
+    .hr{
+      height:1px;
+      background: var(--hairline);
+      margin:0;
+      border:0;
+    }
+
+    /* index list */
+    .index-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-bottom: .65rem;
+    }
+    .index-head h2{
+      font-size: var(--h2);
+      margin:0;
+      font-weight: 560;
+      letter-spacing: -0.01em;
+    }
+    .hint{
+      font-family: var(--mono);
+      font-size: .78rem;
+      color: var(--muted);
+      opacity:.9;
+      white-space: nowrap;
+    }
+
+    .posts{
+      list-style:none;
+      padding: .4rem 0 0 0;
+      margin:0;
+      display:flex;
+      flex-direction: column;
+      gap:.2rem;
+    }
+
+    .posts a{
+      display:flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      padding: .7rem .55rem;
+      border-radius: 14px;
+      border: 1px solid transparent;
+    }
+    .posts a:hover{
+      background: rgba(185,109,51,.06);
+      border-color: rgba(185,109,51,.16);
+    }
+
+    .post-title{
+      font-family: var(--serif);
+      font-weight: 540;
+      letter-spacing: -0.01em;
+    }
+    .post-meta{
+      font-family: var(--sans);
+      font-size: .86rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* reading page */
+    .reading{
+      display:none;
+    }
+    .reading[aria-hidden="false"]{
+      display:block;
+      animation: fadeIn .22s ease both;
+    }
+    @keyframes fadeIn{ from{opacity:0; transform: translateY(6px);} to{opacity:1; transform: translateY(0);} }
+
+    .kicker{
+      font-family: var(--sans);
+      font-size: .9rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 .25rem 0;
+    }
+    .reading h1{
+      margin: 0 0 1.25rem 0;
+      font-size: clamp(1.85rem, 1.55rem + 1.6vw, 2.45rem);
+      line-height: 1.12;
+      letter-spacing: -0.018em;
+      font-weight: 560;
+    }
+    .prose p{
+      margin: 0 0 1.1rem 0;
+    }
+    .prose p:last-child{ margin-bottom: 0; }
+    .prose hr{
+      border:0;
+      height:1px;
+      background: var(--hairline);
+      margin: 1.5rem 0;
+    }
+    .prose ul{
+      margin: .75rem 0 1.25rem 1.2rem;
+      padding:0;
+    }
+    .prose li{ margin: .25rem 0; }
+    .prose blockquote{
+      margin: 1.25rem 0;
+      padding: .2rem 0 .2rem 1rem;
+      border-left: 2px solid var(--accent-2);
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .reading footer{
+      margin-top: 2rem;
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      gap: 1rem;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: .9rem;
+    }
+
+    .back{
+      display:inline-flex;
+      align-items:center;
+      gap:.55rem;
+      padding: .55rem .75rem;
+      border-radius: 999px;
+      border: 1px solid var(--hairline);
+      background: rgba(255,255,255,.04);
+    }
+    .back:hover{
+      border-color: var(--faint);
+      background: rgba(255,255,255,.07);
+      color: var(--ink);
+    }
+
+    .sig{
+      display:flex;
+      align-items:center;
+      gap:.55rem;
+      white-space: nowrap;
+      opacity:.9;
+    }
+    .sig .dot{
+      width: 6px; height: 6px; border-radius: 999px; background: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-2);
+    }
+
+    /* tiny footer */
+    .site-footer{
+      padding: 1.2rem 0 0 0;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: .9rem;
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .email{
+      display:flex;
+      gap:.5rem;
+      align-items:center;
+    }
+    .email input{
+      font-family: var(--sans);
+      font-size: .92rem;
+      padding: .65rem .8rem;
+      border-radius: 999px;
+      border: 1px solid var(--hairline);
+      background: rgba(255,255,255,.22);
+      color: var(--ink);
+      min-width: min(18rem, 70vw);
+    }
+    @media (prefers-color-scheme: dark){
+      .email input{ background: rgba(0,0,0,.22); }
+    }
+    .email button{
+      font-family: var(--sans);
+      font-size: .92rem;
+      padding: .65rem .9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(185,109,51,.34);
+      background: rgba(185,109,51,.12);
+      color: var(--ink);
+      cursor:pointer;
+    }
+    .email button:hover{
+      background: rgba(185,109,51,.18);
+      border-color: rgba(185,109,51,.46);
+    }
+
+    /* accessibility */
+    .skip{
+      position:absolute;
+      left:-9999px;
+      top:auto;
+      width:1px; height:1px;
+      overflow:hidden;
+    }
+    .skip:focus{
+      left: var(--pad);
+      top: var(--pad);
+      width:auto; height:auto;
+      padding:.6rem .85rem;
+      background: var(--paper);
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      box-shadow: var(--shadow-2);
+      z-index: 50;
     }
   </style>
 </head>
 
 <body>
-  <main class="wrap">
-    <div class="topbar">
-      <div class="brand">Mint Condition <span class="sigil" aria-hidden="true"></span></div>
-      <div class="nav"><a href="archive.html">Ledger</a></div>
-    </div>
+  <a class="skip" href="#main">Skip to content</a>
 
-    <h1>Mint Condition</h1>
-
-    <section class="panel" aria-label="Entry 000">
-      <div class="meta">Entry 000 · 2026-01-03</div>
-
-      <p class="lead">
-        Some lines don’t hit.<br />
-        They <em>settle</em>.
-      </p>
-
-      <p>
-        They don’t announce themselves as important. They don’t chase consensus.
-        They don’t inflate. They endure—quietly accruing value as time keeps
-        checking the math and finding no errors.
-      </p>
-
-      <p>
-        When J. Cole says a verse is known like a signed Michael Jordan rookie card
-        in mint condition, he isn’t bragging about popularity. He’s naming a
-        different economy altogether—one where worth is measured by memory,
-        rarity, and survival, not noise.
-      </p>
-
-      <p>
-        A verse you <em>know</em> is no longer content.
-        It’s an artifact.
-      </p>
-
-      <p>This is not about rap.</p>
-      <p style="color:rgba(15,23,42,.62); margin:0;">It’s about what lasts when the volume drops.</p>
-
-      <div class="after">
-        <a href="archive.html">Open Ledger →</a>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <span class="mark" aria-hidden="true"></span>
+        <div style="min-width:0">
+          <h1 class="title"><a href="#/" data-route="home">Mint Condition</a></h1>
+          <p class="subtle">A quiet place for careful words.</p>
+        </div>
       </div>
-    </section>
 
-    <footer>© 2026 Mint Condition</footer>
-  </main>
+      <nav aria-label="Primary">
+        <a class="pill" href="#/" data-route="home">Index</a>
+        <a class="pill" href="#/about" data-route="about">About</a>
+      </nav>
+    </header>
+
+    <main id="main" class="card" role="main">
+      <!-- INDEX -->
+      <section id="view-home" class="section" aria-hidden="false">
+        <div class="index-head">
+          <h2>Posts</h2>
+          <div class="hint">tap a title →</div>
+        </div>
+        <hr class="hr" />
+
+        <ul class="posts" aria-label="Post list">
+          <li>
+            <a href="#/mint-condition" data-post="mint-condition">
+              <span class="post-title">Mint Condition</span>
+              <span class="post-meta">Jan 03</span>
+            </a>
+          </li>
+          <li>
+            <a href="#/why-some-things-age-up" data-post="why-some-things-age-up">
+              <span class="post-title">Why Some Things Age Up</span>
+              <span class="post-meta">Jan 03</span>
+            </a>
+          </li>
+          <li>
+            <a href="#/quiet-supremacy" data-post="quiet-supremacy">
+              <span class="post-title">Quiet Supremacy</span>
+              <span class="post-meta">Jan 03</span>
+            </a>
+          </li>
+          <li>
+            <a href="#/the-collector-and-the-consumer" data-post="the-collector-and-the-consumer">
+              <span class="post-title">The Collector and the Consumer</span>
+              <span class="post-meta">Jan 03</span>
+            </a>
+          </li>
+          <li>
+            <a href="#/know-a-verse" data-post="know-a-verse">
+              <span class="post-title">Know a Verse</span>
+              <span class="post-meta">Jan 03</span>
+            </a>
+          </li>
+          <li>
+            <a href="#/chalk" data-post="chalk">
+              <span class="post-title">Chalk</span>
+              <span class="post-meta">Jan 04</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ABOUT (quiet, optional) -->
+      <section id="view-about" class="section reading" aria-hidden="true">
+        <p class="kicker">About</p>
+        <h1>A room, not a feed.</h1>
+        <div class="prose">
+          <p>
+            Mint Condition is a small place for work in progress, finished work, and the discipline of keeping
+            things in good shape—words, attention, craft.
+          </p>
+          <p>
+            No engagement theater. No algorithm. Just reading.
+          </p>
+        </div>
+        <footer>
+          <a class="back" href="#/" data-route="home" aria-label="Back to index">← Index</a>
+          <span class="sig"><span class="dot" aria-hidden="true"></span> kept with care</span>
+        </footer>
+      </section>
+
+      <!-- POSTS (replace placeholder text with your real drafts) -->
+      <article id="post-mint-condition" class="section reading" aria-hidden="true" data-slug="mint-condition">
+        <p class="kicker">Post</p>
+        <h1>Mint Condition</h1>
+        <div class="prose">
+          <p>
+            <em>Replace this placeholder with your finished draft.</em>
+          </p>
+          <p>
+            Mint condition isn’t about newness. It’s about care. About what happens when something is tended long
+            enough to keep its shape—despite use, weather, and time.
+          </p>
+          <blockquote>
+            A quiet place. A careful pace. A room where the signal stays intact.
+          </blockquote>
+          <p>
+            No announcements. No manifesto. Just the work, dropped gently.
+          </p>
+        </div>
+        <footer>
+          <a class="back" href="#/" data-route="home">← Index</a>
+          <span class="sig"><span class="dot" aria-hidden="true"></span> Mint Condition</span>
+        </footer>
+      </article>
+
+      <article id="post-why-some-things-age-up" class="section reading" aria-hidden="true" data-slug="why-some-things-age-up">
+        <p class="kicker">Post</p>
+        <h1>Why Some Things Age Up</h1>
+        <div class="prose">
+          <p><em>Paste your draft here.</em></p>
+          <p>
+            Some things don’t decay into irrelevance. They deepen. They gather proof. They become more themselves.
+          </p>
+          <hr />
+          <ul>
+            <li>Patina over polish</li>
+            <li>Fewer moves, better moves</li>
+            <li>Time as a collaborator</li>
+          </ul>
+        </div>
+        <footer>
+          <a class="back" href="#/" data-route="home">← Index</a>
+          <span class="sig"><span class="dot" aria-hidden="true"></span> Why Some Things Age Up</span>
+        </footer>
+      </article>
+
+      <article id="post-quiet-supremacy" class="section reading" aria-hidden="true" data-slug="quiet-supremacy">
+        <p class="kicker">Post</p>
+        <h1>Quiet Supremacy</h1>
+        <div class="prose">
+          <p><em>Paste your draft here.</em></p>
+          <p>
+            Quiet isn’t weakness. Quiet is containment. Quiet is heat that doesn’t need spectacle.
+          </p>
+        </div>
+        <footer>
+          <a class="back" href="#/" data-route="home">← Index</a>
+          <span class="sig"><span class="dot" aria-hidden="true"></span> Quiet Supremacy</span>
+        </footer>
+      </article>
+
+      <article id="post-the-collector-and-the-consumer" class="section reading" aria-hidden="true" data-slug="the-collector-and-the-consumer">
+        <p class="kicker">Post</p>
+        <h1>The Collector and the Consumer</h1>
+        <div class="prose">
+          <p><em>Paste your draft here.</em></p>
+          <p>
+            One is building a relationship with objects. The other is passing through them.
+          </p>
+        </div>
+        <footer>
+          <a class="back" href="#/" data-route="home">← Index</a>
+          <span class="sig"><span class="dot" aria-hidden="true"></span> The Collector and the Consumer</span>
+        </footer>
+      </article>
+
+      <article id="post-know-a-verse" class="section reading" aria-hidden="true" data-slug="know-a-verse">
+        <p class="kicker">Post</p>
+        <h1>Know a Verse</h1>
+        <div class="prose">
+          <p><em>Paste your draft here.</em></p>
+          <blockquote>
+            Keep one true line in your pocket. Something you can return to when the world gets loud.
+          </blockquote>
+        </div>
+        <footer>
+          <a class="back" href="#/" data-route="home">← Index</a>
+          <span class="sig"><span class="dot" aria-hidden="true"></span> Know a Verse</span>
+        </footer>
+      </article>
+
+      <article id="post-chalk" class="section reading" aria-hidden="true" data-slug="chalk">
+        <p class="kicker">Post</p>
+        <h1>Chalk</h1>
+        <div class="prose">
+          <p><em>Paste your draft here.</em></p>
+          <p>
+            Some marks are meant to be temporary. That doesn’t make them meaningless.
+          </p>
+        </div>
+        <footer>
+          <a class="back" href="#/" data-route="home">← Index</a>
+          <span class="sig"><span class="dot" aria-hidden="true"></span> Chalk</span>
+        </footer>
+      </article>
+    </main>
+
+    <div class="site-footer">
+      <div>
+        <span style="font-family: var(--mono); font-size:.8rem; letter-spacing:.02em;">
+          © <span id="year"></span> Mint Condition
+        </span>
+        <span style="margin:0 .5rem; color: var(--faint);">·</span>
+        <a href="#/about" data-route="about">quietly kept</a>
+      </div>
+
+      <!-- Optional email capture (wire it to your own backend later) -->
+      <form class="email" onsubmit="event.preventDefault(); alert('Saved. (Wire this to your email tool later.)');">
+        <input type="email" name="email" placeholder="Leave your email (optional)" autocomplete="email" />
+        <button type="submit">Notify</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Tiny router: hash-based, single file, no dependencies.
+    const views = {
+      home: document.getElementById('view-home'),
+      about: document.getElementById('view-about'),
+    };
+
+    const posts = Array.from(document.querySelectorAll('article[data-slug]'))
+      .reduce((acc, el) => (acc[el.dataset.slug] = el, acc), {});
+
+    function hideAll() {
+      // hide index + about + all posts
+      Object.values(views).forEach(v => v.setAttribute('aria-hidden', 'true'));
+      Object.values(posts).forEach(p => p.setAttribute('aria-hidden', 'true'));
+    }
+
+    function showHome() {
+      hideAll();
+      views.home.setAttribute('aria-hidden', 'false');
+      document.title = 'Mint Condition';
+    }
+
+    function showAbout() {
+      hideAll();
+      views.about.setAttribute('aria-hidden', 'false');
+      document.title = 'About — Mint Condition';
+    }
+
+    function showPost(slug) {
+      hideAll();
+      const el = posts[slug];
+      if (!el) return showHome();
+      el.setAttribute('aria-hidden', 'false');
+      document.title = el.querySelector('h1')?.textContent + ' — Mint Condition';
+      // jump to top of card (gentle)
+      document.querySelector('main')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function route() {
+      const hash = (location.hash || '#/').replace('#/', '').trim();
+      if (!hash) return showHome();
+      if (hash === 'about') return showAbout();
+      return showPost(hash);
+    }
+
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    window.addEventListener('hashchange', route);
+    route();
+  </script>
 </body>
 </html>
