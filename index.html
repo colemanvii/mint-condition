@@ -421,4 +421,81 @@
         <p class="kicker">Post</p>
         <h1>Know a Verse</h1>
         <div class="prose"><p><em>Paste your real draft here.</em></p></div>
-        <footer><a class
+        <footer><a class="back" href="#/">← Index</a><span class="sig"><span class="dot" aria-hidden="true"></span> Know a Verse</span></footer>
+      </article>
+
+      <article class="section reading" aria-hidden="true" data-slug="chalk">
+        <p class="kicker">Post</p>
+        <h1>Chalk</h1>
+        <div class="prose"><p><em>Paste your real draft here.</em></p></div>
+        <footer><a class="back" href="#/">← Index</a><span class="sig"><span class="dot" aria-hidden="true"></span> Chalk</span></footer>
+      </article>
+    </main>
+
+    <div class="site-footer">
+      <div>
+        <span style="font-family: var(--mono); font-size:.8rem; letter-spacing:.02em;">
+          © <span id="year"></span> Mint Condition
+        </span>
+        <span style="margin:0 .5rem; color: var(--faint);">·</span>
+        <a href="#/about">quietly kept</a>
+      </div>
+
+      <form class="email" onsubmit="event.preventDefault(); alert('Saved. (Wire later.)');">
+        <input type="email" name="email" placeholder="Leave your email (optional)" autocomplete="email" />
+        <button type="submit">Notify</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const views = {
+      home: document.getElementById('view-home'),
+      about: document.getElementById('view-about'),
+    };
+
+    const posts = Array.from(document.querySelectorAll('article[data-slug]'))
+      .reduce((acc, el) => (acc[el.dataset.slug] = el, acc), {});
+
+    function hideAll() {
+      Object.values(views).forEach(v => v.setAttribute('aria-hidden', 'true'));
+      Object.values(posts).forEach(p => p.setAttribute('aria-hidden', 'true'));
+    }
+
+    function showHome() {
+      hideAll();
+      views.home.setAttribute('aria-hidden', 'false');
+      document.title = 'Mint Condition';
+      document.querySelector('main')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function showAbout() {
+      hideAll();
+      views.about.setAttribute('aria-hidden', 'false');
+      document.title = 'About — Mint Condition';
+      document.querySelector('main')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function showPost(slug) {
+      hideAll();
+      const el = posts[slug];
+      if (!el) return showHome();
+      el.setAttribute('aria-hidden', 'false');
+      const t = el.querySelector('h1')?.textContent?.trim() || 'Post';
+      document.title = `${t} — Mint Condition`;
+      document.querySelector('main')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function route() {
+      const hash = (location.hash || '#/').replace('#/', '').trim();
+      if (!hash) return showHome();
+      if (hash === 'about') return showAbout();
+      return showPost(hash);
+    }
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+    window.addEventListener('hashchange', route);
+    route();
+  </script>
+</body>
+</html>
