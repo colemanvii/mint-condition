@@ -8,44 +8,28 @@
   <meta name="description" content="Mint Condition — a quiet place for careful words." />
 
   <style>
-    /* ---------------------------
-       Mint Condition — Museum Cut
-       Arctic white + blue shadow
-       Quiet, precise, distraction-free
-       --------------------------- */
-
     :root{
-      /* museum palette */
-      --paper: #f6f9ff;
-      --paper-2: #eef4ff;
-      --ink: #0b1220;                 /* cold charcoal/navy */
+      --paper:#f6f9ff;
+      --paper-2:#eef4ff;
+      --ink:#0b1220;
       --muted: rgba(11,18,32,.62);
       --faint: rgba(11,18,32,.18);
       --hairline: rgba(11,18,32,.12);
-
-      /* mint accent */
-      --accent: #7fe6ff;              /* mint-ice */
+      --accent:#7fe6ff;
       --accent-2: rgba(127,230,255,.18);
 
-      /* type */
       --serif: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Garamond, Georgia, serif;
       --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Inter, Roboto, Helvetica, Arial, sans-serif;
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
-      /* layout */
       --max: 44rem;
       --pad: clamp(1.1rem, 3.2vw, 2.6rem);
       --radius: 18px;
 
-      /* rhythm */
       --leading: 1.72;
       --text: clamp(1.06rem, 0.95rem + 0.45vw, 1.22rem);
       --title: clamp(2.0rem, 1.55rem + 2.2vw, 3.0rem);
       --h2: clamp(1.25rem, 1.1rem + 0.6vw, 1.55rem);
-
-      /* shadow */
-      --shadow: 0 18px 45px rgba(11,18,32,.06);
-      --shadow-2: 0 10px 28px rgba(11,18,32,.05);
     }
 
     *{ box-sizing: border-box; }
@@ -107,7 +91,7 @@
       height: 10px;
       border-radius: 999px;
       background: var(--accent);
-      box-shadow: 0 0 0 5px var(--accent-2);
+      box-shadow: 0 0 0 6px var(--accent-2);
       flex: 0 0 auto;
       transform: translateY(.65rem);
     }
@@ -118,10 +102,7 @@
       line-height: 1.05;
       margin:0;
       font-weight: 560;
-      /* mobile fix: allow wrap instead of truncation */
       white-space: normal;
-      overflow: visible;
-      text-overflow: clip;
     }
 
     .subtle{
@@ -151,6 +132,7 @@
       border-radius: 999px;
       background: rgba(255,255,255,.55);
       backdrop-filter: blur(10px);
+      cursor: pointer;
     }
     .pill:hover{
       color: var(--ink);
@@ -162,7 +144,7 @@
       border: 1px solid var(--hairline);
       border-radius: var(--radius);
       background: rgba(255,255,255,.72);
-      box-shadow: var(--shadow);
+      box-shadow: 0 18px 55px rgba(11,18,32,.06);
       overflow:hidden;
       backdrop-filter: blur(10px);
     }
@@ -178,7 +160,6 @@
       border:0;
     }
 
-    /* index list */
     .index-head{
       display:flex;
       align-items:flex-end;
@@ -220,14 +201,10 @@
     }
     .posts a:hover{
       background: rgba(127,230,255,.10);
-      border-color: rgba(127,230,255,.20);
+      border-color: rgba(127,230,255,.22);
     }
 
-    .post-title{
-      font-family: var(--serif);
-      font-weight: 560;
-      letter-spacing: -0.01em;
-    }
+    .post-title{ font-weight: 560; letter-spacing: -0.01em; }
     .post-meta{
       font-family: var(--sans);
       font-size: .86rem;
@@ -236,17 +213,8 @@
     }
 
     /* reading page */
-    .reading{
-      display:none;
-    }
-    .reading[aria-hidden="false"]{
-      display:block;
-      animation: fadeIn .20s ease both;
-    }
-    @keyframes fadeIn{
-      from{opacity:0; transform: translateY(6px);}
-      to{opacity:1; transform: translateY(0);}
-    }
+    .reading{ display:none; }
+    .reading[aria-hidden="false"]{ display:block; }
 
     .kicker{
       font-family: var(--sans);
@@ -263,22 +231,12 @@
       letter-spacing: -0.018em;
       font-weight: 580;
     }
-
-    .prose p{
-      margin: 0 0 1.1rem 0;
-    }
+    .prose p{ margin: 0 0 1.1rem 0; }
     .prose p:last-child{ margin-bottom: 0; }
     .prose hr{
-      border:0;
-      height:1px;
-      background: var(--hairline);
+      border:0; height:1px; background: var(--hairline);
       margin: 1.5rem 0;
     }
-    .prose ul{
-      margin: .75rem 0 1.25rem 1.2rem;
-      padding:0;
-    }
-    .prose li{ margin: .25rem 0; }
     .prose blockquote{
       margin: 1.25rem 0;
       padding: .2rem 0 .2rem 1rem;
@@ -327,7 +285,6 @@
       box-shadow: 0 0 0 4px var(--accent-2);
     }
 
-    /* footer */
     .site-footer{
       padding: 1.2rem 0 0 0;
       color: var(--muted);
@@ -365,28 +322,18 @@
       color: var(--ink);
       cursor:pointer;
     }
-    .email button:hover{
-      background: rgba(127,230,255,.24);
-      border-color: rgba(127,230,255,.72);
-    }
 
-    /* accessibility */
     .skip{
-      position:absolute;
-      left:-9999px;
-      top:auto;
-      width:1px; height:1px;
-      overflow:hidden;
+      position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;
     }
     .skip:focus{
-      left: var(--pad);
-      top: var(--pad);
+      left: var(--pad); top: var(--pad);
       width:auto; height:auto;
       padding:.6rem .85rem;
       background: rgba(255,255,255,.85);
       border: 1px solid var(--hairline);
       border-radius: 12px;
-      box-shadow: var(--shadow-2);
+      box-shadow: 0 10px 28px rgba(11,18,32,.05);
       z-index: 50;
     }
   </style>
@@ -408,11 +355,11 @@
       <nav aria-label="Primary">
         <a class="pill" href="#/" data-route="home">Index</a>
         <a class="pill" href="#/about" data-route="about">About</a>
+        <a class="pill" href="./polar.html">Polar</a>
       </nav>
     </header>
 
     <main id="main" class="card" role="main">
-      <!-- INDEX -->
       <section id="view-home" class="section" aria-hidden="false">
         <div class="index-head">
           <h2>Posts</h2>
@@ -421,204 +368,57 @@
         <hr class="hr" />
 
         <ul class="posts" aria-label="Post list">
-          <li>
-            <a href="#/mint-condition" data-post="mint-condition">
-              <span class="post-title">Mint Condition</span>
-              <span class="post-meta">Jan 03</span>
-            </a>
-          </li>
-          <li>
-            <a href="#/why-some-things-age-up" data-post="why-some-things-age-up">
-              <span class="post-title">Why Some Things Age Up</span>
-              <span class="post-meta">Jan 03</span>
-            </a>
-          </li>
-          <li>
-            <a href="#/quiet-supremacy" data-post="quiet-supremacy">
-              <span class="post-title">Quiet Supremacy</span>
-              <span class="post-meta">Jan 03</span>
-            </a>
-          </li>
-          <li>
-            <a href="#/the-collector-and-the-consumer" data-post="the-collector-and-the-consumer">
-              <span class="post-title">The Collector and the Consumer</span>
-              <span class="post-meta">Jan 03</span>
-            </a>
-          </li>
-          <li>
-            <a href="#/know-a-verse" data-post="know-a-verse">
-              <span class="post-title">Know a Verse</span>
-              <span class="post-meta">Jan 03</span>
-            </a>
-          </li>
-          <li>
-            <a href="#/chalk" data-post="chalk">
-              <span class="post-title">Chalk</span>
-              <span class="post-meta">Jan 04</span>
-            </a>
-          </li>
+          <li><a href="#/mint-condition"><span class="post-title">Mint Condition</span><span class="post-meta">Jan 03</span></a></li>
+          <li><a href="#/why-some-things-age-up"><span class="post-title">Why Some Things Age Up</span><span class="post-meta">Jan 03</span></a></li>
+          <li><a href="#/quiet-supremacy"><span class="post-title">Quiet Supremacy</span><span class="post-meta">Jan 03</span></a></li>
+          <li><a href="#/the-collector-and-the-consumer"><span class="post-title">The Collector and the Consumer</span><span class="post-meta">Jan 03</span></a></li>
+          <li><a href="#/know-a-verse"><span class="post-title">Know a Verse</span><span class="post-meta">Jan 03</span></a></li>
+          <li><a href="#/chalk"><span class="post-title">Chalk</span><span class="post-meta">Jan 04</span></a></li>
         </ul>
       </section>
 
-      <!-- ABOUT (optional; delete if you want pure museum silence) -->
       <section id="view-about" class="section reading" aria-hidden="true">
         <p class="kicker">About</p>
         <h1>A quiet museum for words.</h1>
         <div class="prose">
-          <p>
-            Mint Condition is a small room for careful writing—no algorithm, no noise, no performance.
-            Just the work, preserved.
-          </p>
-          <p>
-            If you’d rather say nothing at all, delete this page and remove “About” from the nav.
-          </p>
+          <p>Mint Condition is a small room for careful writing—no algorithm, no noise, no performance.</p>
         </div>
         <footer>
-          <a class="back" href="#/" data-route="home" aria-label="Back to index">← Index</a>
+          <a class="back" href="#/">← Index</a>
           <span class="sig"><span class="dot" aria-hidden="true"></span> quietly kept</span>
         </footer>
       </section>
 
-      <!-- POSTS — paste your real drafts into the <div class="prose"> blocks -->
-      <article id="post-mint-condition" class="section reading" aria-hidden="true" data-slug="mint-condition">
+      <article class="section reading" aria-hidden="true" data-slug="mint-condition">
         <p class="kicker">Post</p>
         <h1>Mint Condition</h1>
-        <div class="prose">
-          <p><em>Paste your real draft here.</em></p>
-        </div>
-        <footer>
-          <a class="back" href="#/" data-route="home">← Index</a>
-          <span class="sig"><span class="dot" aria-hidden="true"></span> Mint Condition</span>
-        </footer>
+        <div class="prose"><p><em>Paste your real draft here.</em></p></div>
+        <footer><a class="back" href="#/">← Index</a><span class="sig"><span class="dot" aria-hidden="true"></span> Mint Condition</span></footer>
       </article>
 
-      <article id="post-why-some-things-age-up" class="section reading" aria-hidden="true" data-slug="why-some-things-age-up">
+      <article class="section reading" aria-hidden="true" data-slug="why-some-things-age-up">
         <p class="kicker">Post</p>
         <h1>Why Some Things Age Up</h1>
-        <div class="prose">
-          <p><em>Paste your real draft here.</em></p>
-        </div>
-        <footer>
-          <a class="back" href="#/" data-route="home">← Index</a>
-          <span class="sig"><span class="dot" aria-hidden="true"></span> Why Some Things Age Up</span>
-        </footer>
+        <div class="prose"><p><em>Paste your real draft here.</em></p></div>
+        <footer><a class="back" href="#/">← Index</a><span class="sig"><span class="dot" aria-hidden="true"></span> Why Some Things Age Up</span></footer>
       </article>
 
-      <article id="post-quiet-supremacy" class="section reading" aria-hidden="true" data-slug="quiet-supremacy">
+      <article class="section reading" aria-hidden="true" data-slug="quiet-supremacy">
         <p class="kicker">Post</p>
         <h1>Quiet Supremacy</h1>
-        <div class="prose">
-          <p><em>Paste your real draft here.</em></p>
-        </div>
-        <footer>
-          <a class="back" href="#/" data-route="home">← Index</a>
-          <span class="sig"><span class="dot" aria-hidden="true"></span> Quiet Supremacy</span>
-        </footer>
+        <div class="prose"><p><em>Paste your real draft here.</em></p></div>
+        <footer><a class="back" href="#/">← Index</a><span class="sig"><span class="dot" aria-hidden="true"></span> Quiet Supremacy</span></footer>
       </article>
 
-      <article id="post-the-collector-and-the-consumer" class="section reading" aria-hidden="true" data-slug="the-collector-and-the-consumer">
+      <article class="section reading" aria-hidden="true" data-slug="the-collector-and-the-consumer">
         <p class="kicker">Post</p>
         <h1>The Collector and the Consumer</h1>
-        <div class="prose">
-          <p><em>Paste your real draft here.</em></p>
-        </div>
-        <footer>
-          <a class="back" href="#/" data-route="home">← Index</a>
-          <span class="sig"><span class="dot" aria-hidden="true"></span> The Collector and the Consumer</span>
-        </footer>
+        <div class="prose"><p><em>Paste your real draft here.</em></p></div>
+        <footer><a class="back" href="#/">← Index</a><span class="sig"><span class="dot" aria-hidden="true"></span> The Collector and the Consumer</span></footer>
       </article>
 
-      <article id="post-know-a-verse" class="section reading" aria-hidden="true" data-slug="know-a-verse">
+      <article class="section reading" aria-hidden="true" data-slug="know-a-verse">
         <p class="kicker">Post</p>
         <h1>Know a Verse</h1>
-        <div class="prose">
-          <p><em>Paste your real draft here.</em></p>
-        </div>
-        <footer>
-          <a class="back" href="#/" data-route="home">← Index</a>
-          <span class="sig"><span class="dot" aria-hidden="true"></span> Know a Verse</span>
-        </footer>
-      </article>
-
-      <article id="post-chalk" class="section reading" aria-hidden="true" data-slug="chalk">
-        <p class="kicker">Post</p>
-        <h1>Chalk</h1>
-        <div class="prose">
-          <p><em>Paste your real draft here.</em></p>
-        </div>
-        <footer>
-          <a class="back" href="#/" data-route="home">← Index</a>
-          <span class="sig"><span class="dot" aria-hidden="true"></span> Chalk</span>
-        </footer>
-      </article>
-    </main>
-
-    <div class="site-footer">
-      <div>
-        <span style="font-family: var(--mono); font-size:.8rem; letter-spacing:.02em;">
-          © <span id="year"></span> Mint Condition
-        </span>
-        <span style="margin:0 .5rem; color: var(--faint);">·</span>
-        <a href="#/about" data-route="about">quietly kept</a>
-      </div>
-
-      <!-- Optional email capture (wire to your own backend later) -->
-      <form class="email" onsubmit="event.preventDefault(); alert('Saved. (Wire this to your email tool later.)');">
-        <input type="email" name="email" placeholder="Leave your email (optional)" autocomplete="email" />
-        <button type="submit">Notify</button>
-      </form>
-    </div>
-  </div>
-
-  <script>
-    // Tiny hash router: single-file, no dependencies.
-    const views = {
-      home: document.getElementById('view-home'),
-      about: document.getElementById('view-about'),
-    };
-
-    const posts = Array.from(document.querySelectorAll('article[data-slug]'))
-      .reduce((acc, el) => (acc[el.dataset.slug] = el, acc), {});
-
-    function hideAll() {
-      Object.values(views).forEach(v => v.setAttribute('aria-hidden', 'true'));
-      Object.values(posts).forEach(p => p.setAttribute('aria-hidden', 'true'));
-    }
-
-    function showHome() {
-      hideAll();
-      views.home.setAttribute('aria-hidden', 'false');
-      document.title = 'Mint Condition';
-      document.querySelector('main')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    function showAbout() {
-      hideAll();
-      views.about.setAttribute('aria-hidden', 'false');
-      document.title = 'About — Mint Condition';
-      document.querySelector('main')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    function showPost(slug) {
-      hideAll();
-      const el = posts[slug];
-      if (!el) return showHome();
-      el.setAttribute('aria-hidden', 'false');
-      const t = el.querySelector('h1')?.textContent?.trim() || 'Post';
-      document.title = `${t} — Mint Condition`;
-      document.querySelector('main')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    function route() {
-      const hash = (location.hash || '#/').replace('#/', '').trim();
-      if (!hash) return showHome();
-      if (hash === 'about') return showAbout();
-      return showPost(hash);
-    }
-
-    document.getElementById('year').textContent = new Date().getFullYear();
-    window.addEventListener('hashchange', route);
-    route();
-  </script>
-</body>
-</html>
+        <div class="prose"><p><em>Paste your real draft here.</em></p></div>
+        <footer><a class
