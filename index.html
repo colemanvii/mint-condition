@@ -3,28 +3,29 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="color-scheme" content="light dark" />
+  <meta name="color-scheme" content="light" />
   <title>Mint Condition</title>
   <meta name="description" content="Mint Condition — a quiet place for careful words." />
 
   <style>
     /* ---------------------------
-       Mint Condition — single-file site
-       Beautiful, quiet, typographic.
+       Mint Condition — Museum Cut
+       Arctic white + blue shadow
+       Quiet, precise, distraction-free
        --------------------------- */
 
     :root{
-      /* tone */
-      --paper: #fbf7ef;
-      --paper-2: #f6f0e6;
-      --ink: #14110f;
-      --muted: rgba(20,17,15,.62);
-      --faint: rgba(20,17,15,.22);
-      --hairline: rgba(20,17,15,.14);
+      /* museum palette */
+      --paper: #f6f9ff;
+      --paper-2: #eef4ff;
+      --ink: #0b1220;                 /* cold charcoal/navy */
+      --muted: rgba(11,18,32,.62);
+      --faint: rgba(11,18,32,.18);
+      --hairline: rgba(11,18,32,.12);
 
-      /* accent */
-      --accent: #b96d33; /* warm tangerine copper */
-      --accent-2: rgba(185,109,51,.18);
+      /* mint accent */
+      --accent: #7fe6ff;              /* mint-ice */
+      --accent-2: rgba(127,230,255,.18);
 
       /* type */
       --serif: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Garamond, Georgia, serif;
@@ -32,34 +33,19 @@
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
       /* layout */
-      --max: 44rem; /* reading measure */
-      --pad: clamp(1.25rem, 3vw, 2.5rem);
+      --max: 44rem;
+      --pad: clamp(1.1rem, 3.2vw, 2.6rem);
       --radius: 18px;
 
       /* rhythm */
       --leading: 1.72;
       --text: clamp(1.06rem, 0.95rem + 0.45vw, 1.22rem);
-      --title: clamp(2.1rem, 1.6rem + 2.2vw, 3.05rem);
+      --title: clamp(2.0rem, 1.55rem + 2.2vw, 3.0rem);
       --h2: clamp(1.25rem, 1.1rem + 0.6vw, 1.55rem);
 
       /* shadow */
-      --shadow: 0 22px 55px rgba(0,0,0,.06);
-      --shadow-2: 0 10px 28px rgba(0,0,0,.06);
-    }
-
-    @media (prefers-color-scheme: dark){
-      :root{
-        --paper: #0f1010;
-        --paper-2: #141515;
-        --ink: #f1eee8;
-        --muted: rgba(241,238,232,.68);
-        --faint: rgba(241,238,232,.24);
-        --hairline: rgba(241,238,232,.14);
-        --accent: #e39a62;
-        --accent-2: rgba(227,154,98,.18);
-        --shadow: 0 22px 55px rgba(0,0,0,.35);
-        --shadow-2: 0 10px 28px rgba(0,0,0,.30);
-      }
+      --shadow: 0 18px 45px rgba(11,18,32,.06);
+      --shadow-2: 0 10px 28px rgba(11,18,32,.05);
     }
 
     *{ box-sizing: border-box; }
@@ -67,8 +53,8 @@
     body{
       margin:0;
       background:
-        radial-gradient(1200px 800px at 20% -10%, rgba(185,109,51,.10), transparent 60%),
-        radial-gradient(900px 700px at 90% 10%, rgba(185,109,51,.08), transparent 62%),
+        radial-gradient(1100px 700px at 20% -10%, rgba(127,230,255,.12), transparent 60%),
+        radial-gradient(900px 600px at 90% 10%, rgba(120,170,255,.10), transparent 62%),
         linear-gradient(180deg, var(--paper), var(--paper-2));
       color: var(--ink);
       font-family: var(--serif);
@@ -77,20 +63,6 @@
       letter-spacing: 0.01em;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
-    }
-
-    /* subtle grain overlay */
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
-      mix-blend-mode: overlay;
-      opacity:.22;
-    }
-    @media (prefers-color-scheme: dark){
-      body::before{ opacity:.16; mix-blend-mode: soft-light; }
     }
 
     a{
@@ -103,7 +75,7 @@
     a:focus-visible{
       outline: none;
       box-shadow: 0 0 0 3px var(--accent-2);
-      border-radius: 10px;
+      border-radius: 12px;
     }
 
     .wrap{
@@ -113,19 +85,21 @@
     }
 
     header{
-      padding-top: clamp(1.2rem, 2vw, 2rem);
-      padding-bottom: clamp(1.1rem, 2vw, 1.8rem);
+      padding-top: clamp(1.0rem, 2vw, 1.8rem);
+      padding-bottom: clamp(0.95rem, 2vw, 1.6rem);
       display:flex;
-      align-items: baseline;
+      align-items: flex-start;
       justify-content: space-between;
       gap: 1rem;
+      flex-wrap: wrap;
     }
 
     .brand{
       display:flex;
-      align-items: baseline;
+      align-items: flex-start;
       gap:.9rem;
       min-width: 0;
+      flex: 1 1 18rem;
     }
 
     .mark{
@@ -133,9 +107,9 @@
       height: 10px;
       border-radius: 999px;
       background: var(--accent);
-      box-shadow: 0 0 0 4px var(--accent-2);
+      box-shadow: 0 0 0 5px var(--accent-2);
       flex: 0 0 auto;
-      transform: translateY(-2px);
+      transform: translateY(.65rem);
     }
 
     .title{
@@ -143,10 +117,11 @@
       letter-spacing: -0.02em;
       line-height: 1.05;
       margin:0;
-      font-weight: 520;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-weight: 560;
+      /* mobile fix: allow wrap instead of truncation */
+      white-space: normal;
+      overflow: visible;
+      text-overflow: clip;
     }
 
     .subtle{
@@ -155,7 +130,8 @@
       color: var(--muted);
       letter-spacing: .02em;
       line-height: 1.25;
-      margin:0;
+      margin:.35rem 0 0 0;
+      max-width: 34rem;
     }
 
     nav{
@@ -163,32 +139,32 @@
       align-items:center;
       gap:.6rem;
       flex: 0 0 auto;
+      margin-top: .25rem;
     }
+
     .pill{
       font-family: var(--sans);
       font-size: .86rem;
       color: var(--muted);
       border: 1px solid var(--hairline);
-      padding: .5rem .75rem;
+      padding: .52rem .8rem;
       border-radius: 999px;
-      background: rgba(255,255,255,.02);
-      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,.55);
+      backdrop-filter: blur(10px);
     }
     .pill:hover{
       color: var(--ink);
       border-color: var(--faint);
-      background: rgba(255,255,255,.04);
+      background: rgba(255,255,255,.72);
     }
 
     .card{
       border: 1px solid var(--hairline);
       border-radius: var(--radius);
-      background: rgba(255,255,255,.32);
+      background: rgba(255,255,255,.72);
       box-shadow: var(--shadow);
       overflow:hidden;
-    }
-    @media (prefers-color-scheme: dark){
-      .card{ background: rgba(0,0,0,.18); }
+      backdrop-filter: blur(10px);
     }
 
     .section{
@@ -238,18 +214,18 @@
       justify-content: space-between;
       align-items: baseline;
       gap: 1rem;
-      padding: .7rem .55rem;
+      padding: .74rem .6rem;
       border-radius: 14px;
       border: 1px solid transparent;
     }
     .posts a:hover{
-      background: rgba(185,109,51,.06);
-      border-color: rgba(185,109,51,.16);
+      background: rgba(127,230,255,.10);
+      border-color: rgba(127,230,255,.20);
     }
 
     .post-title{
       font-family: var(--serif);
-      font-weight: 540;
+      font-weight: 560;
       letter-spacing: -0.01em;
     }
     .post-meta{
@@ -265,9 +241,12 @@
     }
     .reading[aria-hidden="false"]{
       display:block;
-      animation: fadeIn .22s ease both;
+      animation: fadeIn .20s ease both;
     }
-    @keyframes fadeIn{ from{opacity:0; transform: translateY(6px);} to{opacity:1; transform: translateY(0);} }
+    @keyframes fadeIn{
+      from{opacity:0; transform: translateY(6px);}
+      to{opacity:1; transform: translateY(0);}
+    }
 
     .kicker{
       font-family: var(--sans);
@@ -282,8 +261,9 @@
       font-size: clamp(1.85rem, 1.55rem + 1.6vw, 2.45rem);
       line-height: 1.12;
       letter-spacing: -0.018em;
-      font-weight: 560;
+      font-weight: 580;
     }
+
     .prose p{
       margin: 0 0 1.1rem 0;
     }
@@ -302,8 +282,8 @@
     .prose blockquote{
       margin: 1.25rem 0;
       padding: .2rem 0 .2rem 1rem;
-      border-left: 2px solid var(--accent-2);
-      color: var(--muted);
+      border-left: 2px solid rgba(127,230,255,.45);
+      color: rgba(11,18,32,.70);
       font-style: italic;
     }
 
@@ -316,20 +296,22 @@
       color: var(--muted);
       font-family: var(--sans);
       font-size: .9rem;
+      flex-wrap: wrap;
     }
 
     .back{
       display:inline-flex;
       align-items:center;
       gap:.55rem;
-      padding: .55rem .75rem;
+      padding: .55rem .8rem;
       border-radius: 999px;
       border: 1px solid var(--hairline);
-      background: rgba(255,255,255,.04);
+      background: rgba(255,255,255,.60);
+      backdrop-filter: blur(10px);
     }
     .back:hover{
       border-color: var(--faint);
-      background: rgba(255,255,255,.07);
+      background: rgba(255,255,255,.78);
       color: var(--ink);
     }
 
@@ -342,10 +324,10 @@
     }
     .sig .dot{
       width: 6px; height: 6px; border-radius: 999px; background: var(--accent);
-      box-shadow: 0 0 0 3px var(--accent-2);
+      box-shadow: 0 0 0 4px var(--accent-2);
     }
 
-    /* tiny footer */
+    /* footer */
     .site-footer{
       padding: 1.2rem 0 0 0;
       color: var(--muted);
@@ -360,35 +342,32 @@
 
     .email{
       display:flex;
-      gap:.5rem;
+      gap:.55rem;
       align-items:center;
     }
     .email input{
       font-family: var(--sans);
       font-size: .92rem;
-      padding: .65rem .8rem;
+      padding: .65rem .85rem;
       border-radius: 999px;
       border: 1px solid var(--hairline);
-      background: rgba(255,255,255,.22);
+      background: rgba(255,255,255,.72);
       color: var(--ink);
       min-width: min(18rem, 70vw);
-    }
-    @media (prefers-color-scheme: dark){
-      .email input{ background: rgba(0,0,0,.22); }
     }
     .email button{
       font-family: var(--sans);
       font-size: .92rem;
-      padding: .65rem .9rem;
+      padding: .65rem .95rem;
       border-radius: 999px;
-      border: 1px solid rgba(185,109,51,.34);
-      background: rgba(185,109,51,.12);
+      border: 1px solid rgba(127,230,255,.55);
+      background: rgba(127,230,255,.18);
       color: var(--ink);
       cursor:pointer;
     }
     .email button:hover{
-      background: rgba(185,109,51,.18);
-      border-color: rgba(185,109,51,.46);
+      background: rgba(127,230,255,.24);
+      border-color: rgba(127,230,255,.72);
     }
 
     /* accessibility */
@@ -404,7 +383,7 @@
       top: var(--pad);
       width:auto; height:auto;
       padding:.6rem .85rem;
-      background: var(--paper);
+      background: rgba(255,255,255,.85);
       border: 1px solid var(--hairline);
       border-radius: 12px;
       box-shadow: var(--shadow-2);
@@ -481,43 +460,31 @@
         </ul>
       </section>
 
-      <!-- ABOUT (quiet, optional) -->
+      <!-- ABOUT (optional; delete if you want pure museum silence) -->
       <section id="view-about" class="section reading" aria-hidden="true">
         <p class="kicker">About</p>
-        <h1>A room, not a feed.</h1>
+        <h1>A quiet museum for words.</h1>
         <div class="prose">
           <p>
-            Mint Condition is a small place for work in progress, finished work, and the discipline of keeping
-            things in good shape—words, attention, craft.
+            Mint Condition is a small room for careful writing—no algorithm, no noise, no performance.
+            Just the work, preserved.
           </p>
           <p>
-            No engagement theater. No algorithm. Just reading.
+            If you’d rather say nothing at all, delete this page and remove “About” from the nav.
           </p>
         </div>
         <footer>
           <a class="back" href="#/" data-route="home" aria-label="Back to index">← Index</a>
-          <span class="sig"><span class="dot" aria-hidden="true"></span> kept with care</span>
+          <span class="sig"><span class="dot" aria-hidden="true"></span> quietly kept</span>
         </footer>
       </section>
 
-      <!-- POSTS (replace placeholder text with your real drafts) -->
+      <!-- POSTS — paste your real drafts into the <div class="prose"> blocks -->
       <article id="post-mint-condition" class="section reading" aria-hidden="true" data-slug="mint-condition">
         <p class="kicker">Post</p>
         <h1>Mint Condition</h1>
         <div class="prose">
-          <p>
-            <em>Replace this placeholder with your finished draft.</em>
-          </p>
-          <p>
-            Mint condition isn’t about newness. It’s about care. About what happens when something is tended long
-            enough to keep its shape—despite use, weather, and time.
-          </p>
-          <blockquote>
-            A quiet place. A careful pace. A room where the signal stays intact.
-          </blockquote>
-          <p>
-            No announcements. No manifesto. Just the work, dropped gently.
-          </p>
+          <p><em>Paste your real draft here.</em></p>
         </div>
         <footer>
           <a class="back" href="#/" data-route="home">← Index</a>
@@ -529,16 +496,7 @@
         <p class="kicker">Post</p>
         <h1>Why Some Things Age Up</h1>
         <div class="prose">
-          <p><em>Paste your draft here.</em></p>
-          <p>
-            Some things don’t decay into irrelevance. They deepen. They gather proof. They become more themselves.
-          </p>
-          <hr />
-          <ul>
-            <li>Patina over polish</li>
-            <li>Fewer moves, better moves</li>
-            <li>Time as a collaborator</li>
-          </ul>
+          <p><em>Paste your real draft here.</em></p>
         </div>
         <footer>
           <a class="back" href="#/" data-route="home">← Index</a>
@@ -550,10 +508,7 @@
         <p class="kicker">Post</p>
         <h1>Quiet Supremacy</h1>
         <div class="prose">
-          <p><em>Paste your draft here.</em></p>
-          <p>
-            Quiet isn’t weakness. Quiet is containment. Quiet is heat that doesn’t need spectacle.
-          </p>
+          <p><em>Paste your real draft here.</em></p>
         </div>
         <footer>
           <a class="back" href="#/" data-route="home">← Index</a>
@@ -565,10 +520,7 @@
         <p class="kicker">Post</p>
         <h1>The Collector and the Consumer</h1>
         <div class="prose">
-          <p><em>Paste your draft here.</em></p>
-          <p>
-            One is building a relationship with objects. The other is passing through them.
-          </p>
+          <p><em>Paste your real draft here.</em></p>
         </div>
         <footer>
           <a class="back" href="#/" data-route="home">← Index</a>
@@ -580,10 +532,7 @@
         <p class="kicker">Post</p>
         <h1>Know a Verse</h1>
         <div class="prose">
-          <p><em>Paste your draft here.</em></p>
-          <blockquote>
-            Keep one true line in your pocket. Something you can return to when the world gets loud.
-          </blockquote>
+          <p><em>Paste your real draft here.</em></p>
         </div>
         <footer>
           <a class="back" href="#/" data-route="home">← Index</a>
@@ -595,10 +544,7 @@
         <p class="kicker">Post</p>
         <h1>Chalk</h1>
         <div class="prose">
-          <p><em>Paste your draft here.</em></p>
-          <p>
-            Some marks are meant to be temporary. That doesn’t make them meaningless.
-          </p>
+          <p><em>Paste your real draft here.</em></p>
         </div>
         <footer>
           <a class="back" href="#/" data-route="home">← Index</a>
@@ -616,7 +562,7 @@
         <a href="#/about" data-route="about">quietly kept</a>
       </div>
 
-      <!-- Optional email capture (wire it to your own backend later) -->
+      <!-- Optional email capture (wire to your own backend later) -->
       <form class="email" onsubmit="event.preventDefault(); alert('Saved. (Wire this to your email tool later.)');">
         <input type="email" name="email" placeholder="Leave your email (optional)" autocomplete="email" />
         <button type="submit">Notify</button>
@@ -625,7 +571,7 @@
   </div>
 
   <script>
-    // Tiny router: hash-based, single file, no dependencies.
+    // Tiny hash router: single-file, no dependencies.
     const views = {
       home: document.getElementById('view-home'),
       about: document.getElementById('view-about'),
@@ -635,7 +581,6 @@
       .reduce((acc, el) => (acc[el.dataset.slug] = el, acc), {});
 
     function hideAll() {
-      // hide index + about + all posts
       Object.values(views).forEach(v => v.setAttribute('aria-hidden', 'true'));
       Object.values(posts).forEach(p => p.setAttribute('aria-hidden', 'true'));
     }
@@ -644,12 +589,14 @@
       hideAll();
       views.home.setAttribute('aria-hidden', 'false');
       document.title = 'Mint Condition';
+      document.querySelector('main')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     function showAbout() {
       hideAll();
       views.about.setAttribute('aria-hidden', 'false');
       document.title = 'About — Mint Condition';
+      document.querySelector('main')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     function showPost(slug) {
@@ -657,8 +604,8 @@
       const el = posts[slug];
       if (!el) return showHome();
       el.setAttribute('aria-hidden', 'false');
-      document.title = el.querySelector('h1')?.textContent + ' — Mint Condition';
-      // jump to top of card (gentle)
+      const t = el.querySelector('h1')?.textContent?.trim() || 'Post';
+      document.title = `${t} — Mint Condition`;
       document.querySelector('main')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
@@ -669,9 +616,7 @@
       return showPost(hash);
     }
 
-    // set year
     document.getElementById('year').textContent = new Date().getFullYear();
-
     window.addEventListener('hashchange', route);
     route();
   </script>
