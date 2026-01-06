@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <title>Mint Condition (Polar)</title>
+  <meta name="description" content="Mint Condition — polar mode." />
+
+  <style>
+    :root{
+      --paper:#f8fbff;
+      --paper-2:#eef5ff;
+      --ink:#08101f;
+      --muted: rgba(8,16,31,.60);
+      --faint: rgba(8,16,31,.16);
+      --hairline: rgba(8,16,31,.10);
+      --accent:#7fdcff;
+      --accent-2: rgba(127,220,255,.16);
+
+      --serif: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Garamond, Georgia, serif;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Inter, Roboto, Helvetica, Arial, sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+      --max: 44rem;
+      --pad: clamp(1.1rem, 3.2vw, 2.6rem);
+      --radius: 18px;
+
+      --leading: 1.72;
+      --text: clamp(1.06rem, 0.95rem + 0.45vw, 1.22rem);
+      --title: clamp(2.0rem, 1.55rem + 2.2vw, 3.0rem);
+      --h2: clamp(1.25rem, 1.1rem + 0.6vw, 1.55rem);
+    }
+
+    *{ box-sizing: border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      background:
+        radial-gradient(1200px 700px at 50% -15%, rgba(127,220,255,.20), transparent 60%),
+        radial-gradient(900px 500px at 50% 10%, rgba(255,205,214,.18), transparent 62%),
+        radial-gradient(1000px 700px at 15% 75%, rgba(31,79,255,.08), transparent 62%),
+        linear-gradient(180deg, var(--paper), var(--paper-2));
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: var(--text);
+      line-height: var(--leading);
+      letter-spacing: 0.01em;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a{
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color .18s ease, color .18s ease, background-color .18s ease;
+    }
+    a:hover{ border-bottom-color: var(--faint); }
+    a:focus-visible{
+      outline: none;
+      box-shadow: 0 0 0 3px var(--accent-2);
+      border-radius: 12px;
+    }
+
+    .wrap{
+      max-width: calc(var(--max) + 2*var(--pad));
+      margin: 0 auto;
+      padding: var(--pad);
+    }
+
+    header{
+      padding-top: clamp(1.0rem, 2vw, 1.8rem);
+      padding-bottom: clamp(0.95rem, 2vw, 1.6rem);
+      display:flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items: flex-start;
+      gap:.9rem;
+      min-width: 0;
+      flex: 1 1 18rem;
+    }
+
+    .mark{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px var(--accent-2);
+      flex: 0 0 auto;
+      transform: translateY(.65rem);
+    }
+
+    .title{
+      font-size: var(--title);
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin:0;
+      font-weight: 560;
+      white-space: normal;
+    }
+
+    .subtle{
+      font-family: var(--sans);
+      font-size: .93rem;
+      color: var(--muted);
+      letter-spacing: .02em;
+      line-height: 1.25;
+      margin:.35rem 0 0 0;
+      max-width: 34rem;
+    }
+
+    nav{
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+      flex: 0 0 auto;
+      margin-top: .25rem;
+    }
+
+    .pill{
+      font-family: var(--sans);
+      font-size: .86rem;
+      color: var(--muted);
+      border: 1px solid var(--hairline);
+      padding: .52rem .8rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.62);
+      backdrop-filter: blur(12px);
+      cursor: pointer;
+    }
+    .pill:hover{
+      color: var(--ink);
+      border-color: var(--faint);
+      background: rgba(255,255,255,.78);
+    }
+
+    .card{
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.78);
+      box-shadow: 0 18px 55px rgba(8,16,31,.06);
+      overflow:hidden;
+      backdrop-filter: blur(14px);
+    }
+
+    .section{
+      padding: clamp(1.05rem, 2.2vw, 1.6rem) clamp(1.05rem, 2.5vw, 1.75rem);
+    }
+
+    .hr{ height:1px; background: var(--hairline); margin:0; border:0; }
+
+    .index-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-bottom: .65rem;
+    }
+    .index-head h2{
+      font-size: var(--h2);
+      margin:0;
+      font-weight: 560;
+      letter-spacing: -0.01em;
+    }
+    .hint{
+      font-family: var(--mono);
+      font-size: .78rem;
+      color: var(--muted);
+      opacity:.9;
+      white-space: nowrap;
+    }
+
+    .posts{
+      list-style:none;
+      padding: .4rem 0 0 0;
+      margin:0;
+      display:flex;
+      flex-direction: column;
+      gap:.2rem;
+    }
+
+    .posts a{
+      display:flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      padding: .74rem .6rem;
+      border-radius: 14px;
+      border: 1px solid transparent;
+    }
+    .posts a:hover{
+      background: rgba(127,220,255,.12);
+      border-color: rgba(127,220,255,.24);
+    }
+
+    .post-title{ font-weight: 560; letter-spacing: -0.01em; }
+    .post-meta{
+      font-family: var(--sans);
+      font-size: .86rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .reading{ display:none; }
+    .reading[aria-hidden="false"]{ display:block; }
+
+    .kicker{
+      font-family: var(--sans);
+      font-size: .9rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 .25rem 0;
+    }
+    .reading h1{
+      margin: 0 0 1.25rem 0;
+      font-size: clamp(1.85rem, 1.55rem + 1.6vw, 2.45rem);
+      line-height: 1.12;
+      letter-spacing: -0.018em;
+      font-weight: 580;
+    }
+    .prose p{ margin: 0 0 1.1rem 0; }
+    .prose p:last-child{ margin-bottom: 0; }
+    .prose hr{ border:0; height:1px; background: var(--hairline); margin: 1.5rem 0; }
+    .prose blockquote{
+      margin: 1.25rem 0;
+      padding: .2rem 0 .2rem 1rem;
+      border-left: 2px solid rgba(127,220,255,.50);
+      color: rgba(8,16,31,.70);
+      font-style: italic;
+    }
+
+    .reading footer{
+      margin-top: 2rem;
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      gap: 1rem;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: .9rem;
+      flex-wrap: wrap;
+    }
+
+    .back{
+      display:inline-flex;
+      align-items:center;
+      gap:.55rem;
+      padding: .55rem .8rem;
+      border-radius: 999px;
+      border: 1px solid var(--hairline);
+      background: rgba(255,255,255,.66);
+      backdrop-filter: blur(12px);
+    }
+    .back:hover{ border-color: var(--faint); background: rgba(255,255,255,.82); }
+
+    .sig{
+      display:flex;
+      align-items:center;
+      gap:.55rem;
+      white-space: nowrap;
+      opacity:.9;
+    }
+    .sig .dot{
+      width: 6px; height: 6px; border-radius: 999px; background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-2);
+    }
+
+    .site-footer{
+      padding: 1.2rem 0 0 0;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: .9rem;
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .email{ display:flex; gap:.55rem; align-items:center; }
+    .email input{
+      font-family: var(--sans);
+      font-size: .92rem;
+      padding: .65rem .85rem;
+      border-radius: 999px;
+      border: 1px solid var(--hairline);
+      background: rgba(255,255,255,.78);
+      color: var(--ink);
+      min-width: min(18rem, 70vw);
+    }
+    .email button{
+      font-family: var(--sans);
+      font-size: .92rem;
+      padding: .65rem .95rem;
+      border-radius: 999px;
+      border: 1px solid rgba(127,220,255,.60);
+      background: rgba(127,220,255,.18);
+      color: var(--ink);
+      cursor:pointer;
+    }
+
+    .skip{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+    .skip:focus{
+      left: var(--pad); top: var(--pad);
+      width:auto; height:auto;
+      padding:.6rem .85rem;
+      background: rgba(255,255,255,.90);
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      box-shadow: 0 10px 28px rgba(8,16,31,.05);
+      z-index: 50;
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <span class="mark" aria-hidden="true"></span>
+        <div style="min-width:0">
+          <h1 class="title"><a href="#/" data-route="home">Mint Condition</a></h1>
+          <p class="subtle">A quiet place for careful words.</p>
+        </div>
+      </div>
+
+      <nav aria-label="Primary">
+        <a class="pill" href="#/" data-route="home">Index</a>
+        <a class="pill" href="#/about" data-route="about">About</a>
+        <a class="pill" href="./index.html">Museum</a>
+      </nav>
+    </header>
+
+    <main id="main" class="card" role="main">
+      <section id="view-home" class="section" aria-hidden="false">
+        <div class="index-head">
+          <h2>Posts</h2>
+          <div class="hint">tap a title →</div>
+        </div>
+        <hr class="hr" />
+
+        <ul class="posts" aria-label="Post list">
+          <li><a href="#/mint-condition"><span class="post-title">Mint Condition</span><span class="post-meta">Jan 03</span></a></li>
+          <li><a href="#/why-some-things-age-up"><span class="post-title">Why Some Things Age Up</span><span class="post-meta">Jan 03</span></a></li>
+          <li><a href="#/quiet-supremacy"><span class="post-title">Quiet Supremacy</span><span class="post-meta">Jan 03</span></a></li>
+          <li><a href="#/the-collector-and-the-consumer"><span class="post-title">The Collector and the Consumer</span><span class="post-meta">Jan 03</span></a></li>
+          <li><a href="#/know-a-verse"><span class="post-title">Know a Verse</span><span class="post-meta">Jan 03</span></a></li>
+          <li><a href="#/chalk"><span class="post-title">Chalk</span><span class="post-meta">Jan 04</span></a></li>
+        </ul>
+      </section>
+
+      <section id="view-about" class="section reading" aria-hidden="true">
+        <p class="kicker">About</p>
+        <h1>Polar mode.</h1>
+        <div class="prose">
+          <p>Same room. Colder light.</p>
+        </div>
+        <footer>
+          <a class="back" href="#/">← Index</a>
+          <span class="sig"><span class="dot" aria-hidden="true"></span> quietly kept</span>
+        </footer>
+      </section>
+
+      <article class="section reading" aria-hidden="true" data-slug="mint-condition">
+        <p class="kicker">Post</p>
+        <h1>Mint Condition</h1>
+        <div class="prose"><p><em>Paste your real draft here.</em></p></div>
+        <footer><a class="back" href="#/">← Index</a><span class="sig"><span class="dot" aria-hidden="true"></span> Mint Condition</span></footer>
+      </article>
+
+      <article class="section reading" aria-hidden="true" data-slug="why-some-things-age-up">
+        <p class="kicker">Post</p>
+        <h1>Why Some Things Age Up</h1>
+        <div class="prose"><p><em>Paste your real draft here.</em></p></div>
+        <footer><a class="back" href="#/">← Index</a><span class="sig"><span class="dot" aria-hidden="true"></span> Why Some Things Age Up</span></footer>
+      </article>
+
+      <article class="section reading" aria-hidden="true" data-slug="quiet-supremacy">
+        <p class="kicker">Post</p>
+        <h1>Quiet Supremacy</h1>
+        <div class="prose"><p><em>Paste your real draft here.</em></p></div>
+        <footer><a class="back" href="#/">← Index</a><span class="sig"><span class="dot" aria-hidden="true"></span> Quiet Supremacy</span></footer>
+      </article>
+
+      <article class="section reading" aria-hidden="true" data-slug="the-collector-and-the-consumer">
+        <p class="kicker">Post</p>
+        <h1>The Collector and the Consumer</h1>
+        <div class="prose"><p><em>Paste your real draft here.</em></p></div>
+        <footer><a class="back" href="#/">← Index</a><span class="sig"><span class="dot" aria-hidden="true"></span> The Collector and the Consumer</span></footer>
+      </article>
+
+      <article class="section reading" aria-hidden="true" data-slug="know-a-verse">
+        <p class="kicker">Post</p>
+        <h1>Know a Verse</h1>
+        <div class="prose"><p><em>Paste your real draft here.</em></p></div>
+        <footer><a class="back" href="#/">← Index</a><span class="sig"><span class="dot" aria-hidden="true"></span> Know a Verse</span></footer>
+      </article>
+
+      <article class="section reading" aria-hidden="true" data-slug="chalk">
+        <p class="kicker">Post</p>
+        <h1>Chalk</h1>
+        <div class="prose"><p><em>Paste your real draft here.</em></p></div>
+        <footer><a class="back" href="#/">← Index</a><span class="sig"><span class="dot" aria-hidden="true"></span> Chalk</span></footer>
+      </article>
+    </main>
+
+    <div class="site-footer">
+      <div>
+        <span style="font-family: var(--mono); font-size:.8rem; letter-spacing:.02em;">
+          © <span id="year"></span> Mint Condition
+        </span>
+        <span style="margin:0 .5rem; color: var(--faint);">·</span>
+        <a href="#/about">quietly kept</a>
+      </div>
+
+      <form class="email" onsubmit="event.preventDefault(); alert('Saved. (Wire later.)');">
+        <input type="email" name="email" placeholder="Leave your email (optional)" autocomplete="email" />
+        <button type="submit">Notify</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const views = {
+      home: document.getElementById('view-home'),
+      about: document.getElementById('view-about'),
+    };
+
+    const posts = Array.from(document.querySelectorAll('article[data-slug]'))
+      .reduce((acc, el) => (acc[el.dataset.slug] = el, acc), {});
+
+    function hideAll() {
+      Object.values(views).forEach(v => v.setAttribute('aria-hidden', 'true'));
+      Object.values(posts).forEach(p => p.setAttribute('aria-hidden', 'true'));
+    }
+
+    function showHome() {
+      hideAll();
+      views.home.setAttribute('aria-hidden', 'false');
+      document.title = 'Mint Condition (Polar)';
+      document.querySelector('main')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function showAbout() {
+      hideAll();
+      views.about.setAttribute('aria-hidden', 'false');
+      document.title = 'About — Mint Condition (Polar)';
+      document.querySelector('main')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function showPost(slug) {
+      hideAll();
+      const el = posts[slug];
+      if (!el) return showHome();
+      el.setAttribute('aria-hidden', 'false');
+      const t = el.querySelector('h1')?.textContent?.trim() || 'Post';
+      document.title = `${t} — Mint Condition (Polar)`;
+      document.querySelector('main')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function route() {
+      const hash = (location.hash || '#/').replace('#/', '').trim();
+      if (!hash) return showHome();
+      if (hash === 'about') return showAbout();
+      return showPost(hash);
+    }
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+    window.addEventListener('hashchange', route);
+    route();
+  </script>
+</body>
+</html>
