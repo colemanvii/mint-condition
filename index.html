@@ -1,395 +1,256 @@
 <!doctype html>
-<html lang="en" data-theme="museum">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="color-scheme" content="light" />
   <title>Mint Condition</title>
-  <meta name="description" content="Mint Condition — a quiet place for careful words." />
-
   <style>
-    /* =========================
-       MINT CONDITION — CLEAN FILE
-       museum ↔ polar toggle
-       ========================= */
-
     :root{
-      --serif: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Garamond, Georgia, serif;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Inter, Roboto, Helvetica, Arial, sans-serif;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-
-      --max: 46rem;
-      --pad: clamp(1.1rem, 3.2vw, 2.6rem);
-      --radius: 12px; /* cut #2: less pillow */
-
-      --leading: 1.72;
-      --text: clamp(1.06rem, 0.95rem + 0.45vw, 1.22rem);
-      --title: clamp(2.0rem, 1.55rem + 2.2vw, 3.0rem);
-      --h2: clamp(1.25rem, 1.1rem + 0.6vw, 1.55rem);
+      --bg:#eef6ff;
+      --panel:#f7fbff;
+      --text:#0b1220;
+      --muted:#4b5563;
+      --line:rgba(12,18,32,.12);
+      --pill:rgba(11,18,32,.06);
+      --pillLine:rgba(11,18,32,.10);
+      --shadow:0 12px 40px rgba(10,20,35,.08);
+      --radius:22px;
+    }
+    [data-theme="polar"]{
+      --bg:#eaf6ff;
+      --panel:#f3fbff;
+      --text:#07101f;
+      --muted:#3c4a63;
+      --line:rgba(5,16,31,.12);
+      --pill:rgba(4,18,36,.05);
+      --pillLine:rgba(4,18,36,.10);
+      --shadow:0 16px 60px rgba(0,40,90,.10);
     }
 
-    /* ---------- THEMES (variables only) ---------- */
-    html[data-theme="museum"]{
-      --paper:#f6f9ff;
-      --paper-2:#eef4ff;
-      --ink:#0b1220;
-      --muted: rgba(11,18,32,.62);
-      --faint: rgba(11,18,32,.18);
-      --hairline: rgba(11,18,32,.12);
-
-      /* cut #3: quieter accent */
-      --accent:#a8dff2;
-      --accent-2: rgba(168,223,242,.18);
-
-      /* cut #1: less glow */
-      --bg1: rgba(127,230,255,.07);
-      --bg2: rgba(120,170,255,.06);
-      --bg3: rgba(255,205,214,.00);
-      --bg4: rgba(31,79,255,.00);
-    }
-
-    html[data-theme="polar"]{
-      --paper:#f8fbff;
-      --paper-2:#eef5ff;
-      --ink:#08101f;
-      --muted: rgba(8,16,31,.60);
-      --faint: rgba(8,16,31,.16);
-      --hairline: rgba(8,16,31,.10);
-
-      /* cut #3: quieter accent */
-      --accent:#a8dff2;
-      --accent-2: rgba(168,223,242,.16);
-
-      /* cut #1: less glow (polar still has horizon) */
-      --bg1: rgba(127,220,255,.10);
-      --bg2: rgba(120,170,255,.06);
-      --bg3: rgba(255,205,214,.12);
-      --bg4: rgba(31,79,255,.06);
-    }
-
-    *{ box-sizing: border-box; }
-    html,body{ height:100%; }
-
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
-      background:
-        radial-gradient(1200px 700px at 50% -15%, var(--bg1), transparent 60%),
-        radial-gradient(900px 600px at 90% 10%, var(--bg2), transparent 62%),
-        radial-gradient(900px 500px at 50% 10%, var(--bg3), transparent 62%),
-        radial-gradient(1000px 700px at 15% 75%, var(--bg4), transparent 62%),
-        linear-gradient(180deg, var(--paper), var(--paper-2));
-      color: var(--ink);
-      font-family: var(--serif);
-      font-size: var(--text);
-      line-height: var(--leading);
-      letter-spacing: 0.01em;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
+      background:var(--bg);
+      color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
-
-    a{
-      color: inherit;
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color .18s ease, background-color .18s ease, color .18s ease;
-    }
-    a:hover{ border-bottom-color: var(--faint); }
-    a:focus-visible{
-      outline: none;
-      box-shadow: 0 0 0 3px var(--accent-2);
-      border-radius: 12px;
-    }
-
     .wrap{
-      max-width: calc(var(--max) + 2*var(--pad));
-      margin: 0 auto;
-      padding: var(--pad);
+      max-width:780px;
+      margin:0 auto;
+      padding:28px 16px 34px;
     }
 
-    header{
-      padding-top: clamp(1.0rem, 2vw, 1.8rem);
-      padding-bottom: clamp(0.95rem, 2vw, 1.6rem);
-      display:flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
+    header{display:flex;flex-direction:column;gap:14px;margin-bottom:18px}
     .brand{
-      display:flex;
-      align-items: flex-start;
-      gap:.9rem;
-      min-width: 0;
-      flex: 1 1 18rem;
+      display:flex;align-items:flex-start;gap:12px;
     }
-
-    .mark{
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 6px var(--accent-2);
-      flex: 0 0 auto;
-      transform: translateY(.65rem);
+    .dot{
+      width:12px;height:12px;border-radius:999px;
+      background:rgba(120,210,255,.35);
+      box-shadow:0 0 0 6px rgba(120,210,255,.12);
+      margin-top:18px;
+      flex:0 0 auto;
     }
-
-    .title{
-      font-size: var(--title);
-      letter-spacing: -0.02em;
-      line-height: 1.05;
+    h1{
       margin:0;
-      font-weight: 600;
-      white-space: normal;
+      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+      font-weight:800;
+      font-size:44px;
+      letter-spacing:-.02em;
+      line-height:1.05;
     }
 
-    .subtle{
-      font-family: var(--sans);
-      font-size: .93rem;
-      color: var(--muted);
-      letter-spacing: .02em;
-      line-height: 1.25;
-      margin:.35rem 0 0 0;
-      max-width: 34rem;
+    .tabs{
+      display:flex;gap:10px;flex-wrap:wrap;
     }
-
-    nav{
-      display:flex;
-      align-items:center;
-      gap:.6rem;
-      flex: 0 0 auto;
-      margin-top: .25rem;
-    }
-
     .pill{
-      font-family: var(--sans);
-      font-size: .86rem;
-      color: var(--muted);
-      border: 1px solid var(--hairline);
-      padding: .52rem .8rem;
-      border-radius: 999px;
-      background: rgba(255,255,255,.55);
-      backdrop-filter: blur(10px);
-      cursor: pointer;
+      appearance:none;
+      border:1px solid var(--pillLine);
+      background:var(--pill);
+      color:var(--text);
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:14px;
+      letter-spacing:.02em;
+      cursor:pointer;
+      user-select:none;
+      transition:transform .08s ease, background .15s ease;
     }
-    .pill:hover{
-      color: var(--ink);
-      border-color: var(--faint);
-      background: rgba(255,255,255,.70);
+    .pill:active{transform:translateY(1px)}
+    .pill[aria-pressed="true"]{
+      background:rgba(120,210,255,.22);
+      border-color:rgba(120,210,255,.38);
     }
 
-    main.card{
-      border: 1px solid var(--hairline);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.74);
-      box-shadow: 0 18px 55px rgba(11,18,32,.06);
+    main{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
       overflow:hidden;
-      backdrop-filter: blur(12px);
     }
 
     .section{
-      padding: clamp(1.05rem, 2.2vw, 1.6rem) clamp(1.05rem, 2.5vw, 1.75rem);
+      display:none;
+      padding:18px 18px 6px;
+    }
+    .section.active{display:block}
+
+    .list{list-style:none;margin:0;padding:0}
+    .item{
+      display:flex;align-items:baseline;justify-content:space-between;
+      gap:16px;
+      padding:16px 18px;
+      border-top:1px solid var(--line);
+    }
+    .item:first-child{border-top:0}
+    a.title{
+      color:var(--text);
+      text-decoration:none;
+      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+      font-weight:800;
+      font-size:30px;
+      letter-spacing:-.01em;
+      line-height:1.15;
+    }
+    .date{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      font-size:13px;
+      color:var(--muted);
+      white-space:nowrap;
+      letter-spacing:.06em;
+      text-transform:uppercase;
     }
 
-    .hr{
-      height:1px;
-      background: var(--hairline);
-      margin:0;
-      border:0;
+    footer{
+      display:flex;justify-content:space-between;align-items:center;
+      gap:14px;
+      padding:14px 4px 0;
+      color:var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      font-size:13px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
     }
 
-    .index-head{
-      display:flex;
-      align-items:flex-end;
-      justify-content: space-between;
-      gap: 1rem;
-      padding-bottom: .65rem;
-    }
-    .index-head h2{
-      font-size: var(--h2);
-      margin:0;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-    }
-    .hint{
-      font-family: var(--mono);
-      font-size: .78rem;
-      color: var(--muted);
-      opacity:.9;
-      white-space: nowrap;
-    }
-
-    ul.posts{
-      list-style:none;
-      padding: .4rem 0 0 0;
-      margin:0;
-      display:flex;
-      flex-direction: column;
-      gap:.2rem;
-    }
-
-    ul.posts a{
-      display:flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 1rem;
-      padding: .74rem .6rem;
-      border-radius: 12px;
-      border: 1px solid transparent;
-    }
-    ul.posts a:hover{
-      background: rgba(168,223,242,.10);
-      border-color: rgba(168,223,242,.22);
-    }
-
-    .post-title{ font-weight: 600; letter-spacing: -0.01em; }
-    .post-meta{
-      font-family: var(--sans);
-      font-size: .86rem;
-      color: var(--muted);
-      white-space: nowrap;
-    }
-
-    .site-footer{
-      padding: 1.1rem 0 0 0;
-      color: var(--muted);
-      font-family: var(--sans);
-      font-size: .9rem;
-      display:flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    /* cut #4: email recedes */
-    .email{
-      display:flex;
-      gap:.55rem;
-      align-items:center;
-      opacity: .65;
-    }
-    .email input{
-      font-family: var(--sans);
-      font-size: .92rem;
-      padding: .65rem .85rem;
-      border-radius: 999px;
-      border: 1px solid var(--hairline);
-      background: rgba(255,255,255,.55);
-      color: var(--ink);
-      min-width: min(18rem, 70vw);
-    }
-    .email button{
-      font-family: var(--sans);
-      font-size: .92rem;
-      padding: .65rem .95rem;
-      border-radius: 999px;
-      border: 1px solid rgba(168,223,242,.55);
-      background: rgba(168,223,242,.10); /* cut #3: quieter */
-      color: var(--ink);
-      cursor:pointer;
-    }
-
-    .skip{
-      position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;
-    }
-    .skip:focus{
-      left: var(--pad); top: var(--pad);
-      width:auto; height:auto;
-      padding:.6rem .85rem;
-      background: rgba(255,255,255,.88);
-      border: 1px solid var(--hairline);
-      border-radius: 12px;
-      box-shadow: 0 10px 28px rgba(11,18,32,.05);
-      z-index: 50;
+    @media (max-width:520px){
+      h1{font-size:40px}
+      a.title{font-size:28px}
+      .item{padding:14px 16px}
+      .section{padding:16px 16px 4px}
     }
   </style>
 </head>
 
-<body>
-  <a class="skip" href="#main">Skip to content</a>
-
+<body data-theme="polar">
   <div class="wrap">
     <header>
       <div class="brand">
-        <span class="mark" aria-hidden="true"></span>
-        <div style="min-width:0">
-          <h1 class="title"><a href="./index.html">Mint Condition</a></h1>
-          <p class="subtle">A quiet place for careful words.</p>
-        </div>
+        <div class="dot" aria-hidden="true"></div>
+        <h1>Mint Condition</h1>
       </div>
 
-      <nav aria-label="Primary">
-        <a class="pill" href="./index.html" aria-current="page">Index</a>
-        <a class="pill" href="./archive.html">Archive</a>
-        <button class="pill" id="themeToggle" type="button" aria-label="Toggle theme">Polar</button>
-      </nav>
+      <div class="tabs">
+        <button class="pill" data-view="index" aria-pressed="true">Index</button>
+        <button class="pill" data-view="archive" aria-pressed="false">Archive</button>
+        <button class="pill" id="themeToggle" aria-pressed="true">Polar</button>
+      </div>
     </header>
 
-    <main id="main" class="card" role="main">
-      <section class="section">
-        <div class="index-head">
-          <h2>Posts</h2>
-          <div class="hint">tap a title →</div>
-        </div>
-        <hr class="hr" />
+    <main>
+      <section class="section active" id="view-index" aria-label="Index">
+        <ul class="list">
+          <li class="item">
+            <a class="title" href="post.html">Mint Condition</a>
+            <span class="date">Jan 03</span>
+          </li>
+          <li class="item">
+            <a class="title" href="post.html">Why Some Things Age Up</a>
+            <span class="date">Jan 03</span>
+          </li>
+          <li class="item">
+            <a class="title" href="post.html">Quiet Supremacy</a>
+            <span class="date">Jan 03</span>
+          </li>
+          <li class="item">
+            <a class="title" href="post.html">The Collector and the Consumer</a>
+            <span class="date">Jan 03</span>
+          </li>
+          <li class="item">
+            <a class="title" href="post.html">Know a Verse</a>
+            <span class="date">Jan 03</span>
+          </li>
+        </ul>
+      </section>
 
-        <!-- EDIT THESE LINKS TO MATCH YOUR FILES -->
-        <ul class="posts" aria-label="Post list">
-          <li><a href="./entry-001.html"><span class="post-title">Mint Condition</span><span class="post-meta">Jan 03</span></a></li>
-          <li><a href="./entry-002.html"><span class="post-title">Why Some Things Age Up</span><span class="post-meta">Jan 03</span></a></li>
-          <li><a href="./entry-003.html"><span class="post-title">Quiet Supremacy</span><span class="post-meta">Jan 03</span></a></li>
-          <li><a href="./entry-004.html"><span class="post-title">The Collector and the Consumer</span><span class="post-meta">Jan 03</span></a></li>
-          <li><a href="./entry-005.html"><span class="post-title">Know a Verse</span><span class="post-meta">Jan 03</span></a></li>
-          <!-- if you add entry-006.html later, add it here -->
+      <section class="section" id="view-archive" aria-label="Archive">
+        <ul class="list">
+          <li class="item">
+            <a class="title" href="post.html">Mint Condition</a>
+            <span class="date">2026</span>
+          </li>
+          <li class="item">
+            <a class="title" href="post.html">Why Some Things Age Up</a>
+            <span class="date">2026</span>
+          </li>
+          <li class="item">
+            <a class="title" href="post.html">Quiet Supremacy</a>
+            <span class="date">2026</span>
+          </li>
+          <li class="item">
+            <a class="title" href="post.html">The Collector and the Consumer</a>
+            <span class="date">2026</span>
+          </li>
+          <li class="item">
+            <a class="title" href="post.html">Know a Verse</a>
+            <span class="date">2026</span>
+          </li>
         </ul>
       </section>
     </main>
 
-    <div class="site-footer">
-      <div>
-        <span style="font-family: var(--mono); font-size:.8rem; letter-spacing:.02em;">
-          © <span id="year"></span> Mint Condition
-        </span>
-        <span style="margin:0 .5rem; color: var(--faint);">·</span>
-        <span>quietly kept</span>
-      </div>
-
-      <form class="email" onsubmit="event.preventDefault(); alert('Saved. (Wire later.)');">
-        <input type="email" name="email" placeholder="Leave your email (optional)" autocomplete="email" />
-        <button type="submit">Notify</button>
-      </form>
-    </div>
+    <footer>
+      <span>© 2026 Mint Condition</span>
+      <span></span>
+    </footer>
   </div>
 
   <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    (function () {
+      const root = document.body;
+      const tabButtons = [...document.querySelectorAll('.pill[data-view]')];
+      const views = {
+        index: document.getElementById('view-index'),
+        archive: document.getElementById('view-archive')
+      };
 
-    // Theme toggle (Museum ↔ Polar) + persistence
-    (function(){
-      const root = document.documentElement;
-      const btn = document.getElementById('themeToggle');
-      if(!btn) return;
-
-      const saved = localStorage.getItem('mc_theme');
-      const initial = saved || root.getAttribute('data-theme') || 'museum';
-      root.setAttribute('data-theme', initial);
-
-      function sync(){
-        const t = root.getAttribute('data-theme') || 'museum';
-        btn.textContent = (t === 'museum') ? 'Polar' : 'Museum';
+      function setView(name){
+        Object.keys(views).forEach(k => views[k].classList.toggle('active', k === name));
+        tabButtons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === name)));
+        localStorage.setItem('mc_view', name);
       }
 
-      btn.addEventListener('click', () => {
-        const current = root.getAttribute('data-theme') || 'museum';
-        const next = (current === 'museum') ? 'polar' : 'museum';
-        root.setAttribute('data-theme', next);
-        localStorage.setItem('mc_theme', next);
-        sync();
+      tabButtons.forEach(btn => btn.addEventListener('click', () => setView(btn.dataset.view)));
+
+      const themeBtn = document.getElementById('themeToggle');
+      function setTheme(theme){
+        root.setAttribute('data-theme', theme);
+        const isPolar = theme === 'polar';
+        themeBtn.textContent = isPolar ? 'Polar' : 'Museum';
+        themeBtn.setAttribute('aria-pressed', String(isPolar));
+        localStorage.setItem('mc_theme', theme);
+      }
+
+      themeBtn.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'polar' ? 'museum' : 'polar';
+        setTheme(next);
       });
 
-      sync();
+      setTheme(localStorage.getItem('mc_theme') || 'polar');
+      setView(localStorage.getItem('mc_view') || 'index');
     })();
   </script>
 </body>
